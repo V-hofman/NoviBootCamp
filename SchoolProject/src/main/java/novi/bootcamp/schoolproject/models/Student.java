@@ -25,8 +25,8 @@ public class Student {
     }
 
     public Student(studentBuilder builder) {
-        this.studentID = studentID;
-        this.user = user;
+        this.studentID = builder.studentID;
+        this.user = builder.user;
     }
 
     //endregion
@@ -53,7 +53,7 @@ public class Student {
     //region Builder
     public static class studentBuilder
     {
-        private int parentID;
+        private int studentID;
         private User user;
 
         public studentBuilder()
@@ -61,15 +61,15 @@ public class Student {
 
         }
 
-        public studentBuilder(int parentID, User user)
+        public studentBuilder(int studentID, User user)
         {
             this.user = user;
-            this.parentID = parentID;
+            this.studentID = studentID;
         }
 
-        public studentBuilder parentID(int parentID)
+        public studentBuilder studentID(int studentID)
         {
-            this.parentID = parentID;
+            this.studentID = studentID;
             return this;
         }
 
