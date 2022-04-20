@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
+    //region Variables
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true,name="userID")
@@ -25,7 +26,10 @@ public class User {
     @Column(nullable = false, name="role")
     private String role;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Parent parent;
 
+    //endregion
 
     //region Get/set
     public int getId() {
@@ -66,6 +70,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 
     //endregion

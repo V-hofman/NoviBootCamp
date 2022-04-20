@@ -1,11 +1,8 @@
 package novi.bootcamp.schoolproject.controllers;
 
-import novi.bootcamp.schoolproject.login.CustomUserDetailService;
 import novi.bootcamp.schoolproject.models.User;
-import novi.bootcamp.schoolproject.repository.UserRepository;
 import novi.bootcamp.schoolproject.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
