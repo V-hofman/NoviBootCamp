@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link th:href="@{css/mainstyle.css}" href="../static/css/mainstyle.css"
+          rel="stylesheet" type="text/css" media="screen"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>School Agenda</title>
+</head>
+
+<body>
+
+<div id="box">
+    <p id="LoginPrompt">Keuzemenu</p>
+    <span id="keuzeMenu"><h2>USER MANAGEMENT</h2>
+        <div> <a th:href="@{/Admin/ShowUsers}">Toon alle gebruikers</a></div>
+    <div> <a th:href="@{/Admin/RegisterUser}">Nieuwe Gebruiker registreren</a></div>
+    <div> <a th:href="@{/Admin/RemoveUser}">Bestaande gebruiker verwijderen</a></div>
+    <div> <a th:href="@{/Admin/UpdateUser}">Bestaande gebruiker aanpassen</a></div><br>
+        <h2>CLASSROOM MANAGEMENT</h2>
+
+    <div> <a th:href="@{/perform_logout}">Uitloggen</a></div>
+    </span>
+    <div>
+        <p id="signature">This project was made by<br> Vincent M. Seremak</p>
+    </div>
+</div>
+
+<div id="logo">
+    <img th:src="@{imgs/noviLogo.png}"/>
+</div>
+
+</body>
+
+</html>

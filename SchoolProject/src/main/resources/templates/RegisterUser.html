@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link th:href="@{../css/mainstyle.css}" href="../static/css/mainstyle.css"
+          rel="stylesheet" type="text/css" media="screen"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>School Agenda</title>
+</head>
+
+<body>
+
+<div id="box">
+    <p id="LoginPrompt">Register User</p>
+    <form id="boxRegister" th:action="@{/Admin/RegisterUser}" th:object="${user}" method="post">
+        <table>
+            <tr><td class="InputList">
+            <label for="username">Username:</label></br>
+            <input name="username" type="text" id="username" autocomplete="off" placeholder="Username" required
+                   minlength="=2" maxlength="20" th:field="*{Username}"></br>
+            <label for="password">Password:</label></br>
+            <input name="password" type="password" id="password" placeholder="Password" required
+                   minlength="=2" maxlength="64" th:field="*{Password}"></br><br>
+            </td><td class="RadioList">
+                <div class="CenterList">
+                    <input type="radio" id="admin" name="role_type" value="Admin" th:field="*{role}" required>
+                    <label for="admin">Admin</label><br>
+                    <input type="radio" id="student" name="role_type" value="Student" th:field="*{role}">
+                    <label for="student">Student</label><br>
+                    <input type="radio" id="docent" name="role_type" value="Teacher" th:field="*{role}">
+                    <label for="docent">Docent</label><br>
+                    <input type="radio" id="ouder" name="role_type" value="Parent" th:field="*{role}">
+                    <label for="ouder">Ouder/Voogd</label><br>
+                </div>
+            </td></tr></table>
+        <input id="submitRegister" type="submit" value="Registreer"></br>
+    </form>
+    <div>
+        <p id="signature">This project was made by<br> Vincent M. Seremak</p>
+    </div>
+    <div> <a align="center" th:href="@{/Admin}">Ga terug</a></div>
+</div>
+
+<div id="logo">
+    <img th:src="@{../imgs/noviLogo.png}"/>
+</div>
+
+</body>
+
+</html>

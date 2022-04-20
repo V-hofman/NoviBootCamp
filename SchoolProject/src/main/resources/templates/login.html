@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:margin="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../static/css/mainstyle.css" th:href="@{/css/mainstyle.css}"
+          type="text/css" rel="stylesheet" media="screen"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>School Agenda</title>
+    </head>
+
+<body>
+
+<div id="box">
+    <p id="LoginPrompt">Login</p>
+    <form th:action="@{/login}" method="post" th:object="${user}">
+        <div th:if="${param.error}" class="alert alert-error">
+            <p margin:auto>Invalid username and password.</p>
+        </div>
+        <label class="boxLoginLabel" for="username">Username:</label></br>
+        <input class="boxLoginInput" name="username" type="text" id="username" autocomplete="off" placeholder="Username" th:field="*{Username}" required
+        minlength="=2" maxlength="20"></br>
+        <label class="boxLoginLabel" for="password">Password:</label></br>
+        <input class="boxLoginInput" name="password" type="password" id="password" placeholder="Password" th:field="*{Password}"  required
+               minlength="=2" maxlength="64"></br><br>
+        <input class="boxLoginInput" id="submit" type="submit" value="Log me in!"></br>
+    </form>
+    <div>
+        <br><br>
+        <p id="signature">This project was made by<br> Vincent M. Seremak</p>
+    </div>
+</div>
+
+<div id="logo">
+    <img th:src="@{../imgs/noviLogo.png}"/>
+</div>
+
+</body>
+
+</html>
