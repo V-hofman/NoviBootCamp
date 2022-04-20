@@ -1,0 +1,16 @@
+
+D
+java:S1172".Remove this unused method parameter "builder".(êŠ‚²
+E
+java:S1656"/Remove or correct this useless self-assignment.(¸ĞÑš
+E
+java:S1656"/Remove or correct this useless self-assignment.(»¶¤İ
+B
+java:S10688",Remove this unused "parentID" private field.(ı×¼Ç
+C
+java:S10689"(Remove this unused "user" private field.(’Ø¾ıÿÿÿÿ
+g	java:S1016"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(‡‘¢«şÿÿÿÿ
+}
+java:S4165"gRemove this useless assignment; "studentID" already holds the assigned value along all execution paths.(¸ĞÑš
+x
+java:S4165"bRemove this useless assignment; "user" already holds the assigned value along all execution paths.(»¶¤İ

@@ -3,14 +3,14 @@ package novi.bootcamp.schoolproject.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "parents")
-public class Parent {
+@Table(name = "student")
+public class Student {
 
     //region Variables
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true,name = "ParentID")
-    private int ParentID;
+    @Column(nullable = false, unique = true,name = "studentID")
+    private int studentID;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userID", referencedColumnName = "userID")
@@ -19,25 +19,25 @@ public class Parent {
     //endregion
 
     //region Constructors
-    public Parent()
+    public Student()
     {
 
     }
 
-    public Parent(parentBuilder builder) {
-        this.ParentID = builder.ParentID;
-        this.user = builder.user;
+    public Student(studentBuilder builder) {
+        this.studentID = studentID;
+        this.user = user;
     }
 
     //endregion
 
     //region Getters/setters
-    public int getParentID() {
-        return ParentID;
+    public int getStudentID() {
+        return studentID;
     }
 
-    public void setParentID(int parentID) {
-        ParentID = parentID;
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
     }
 
     public User getUser() {
@@ -51,37 +51,37 @@ public class Parent {
     //endregion
 
     //region Builder
-    public static class parentBuilder
+    public static class studentBuilder
     {
-        private int ParentID;
+        private int parentID;
         private User user;
 
-        public parentBuilder()
+        public studentBuilder()
         {
 
         }
 
-        public parentBuilder(int ParentID, User user)
+        public studentBuilder(int parentID, User user)
         {
-            this.ParentID = ParentID;
             this.user = user;
+            this.parentID = parentID;
         }
 
-        public parentBuilder ParentID(int ParentID)
+        public studentBuilder parentID(int parentID)
         {
-            this.ParentID = ParentID;
+            this.parentID = parentID;
             return this;
         }
 
-        public parentBuilder User(User user)
+        public studentBuilder user(User user)
         {
             this.user = user;
             return this;
         }
 
-        public Parent build()
+        public Student build()
         {
-            return new Parent(this);
+            return new Student(this);
         }
     }
     //endregion

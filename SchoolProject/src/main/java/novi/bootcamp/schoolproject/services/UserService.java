@@ -1,13 +1,16 @@
 package novi.bootcamp.schoolproject.services;
 
 import novi.bootcamp.schoolproject.models.Parent;
+import novi.bootcamp.schoolproject.models.Student;
 import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.repository.ParentRepository;
+import novi.bootcamp.schoolproject.repository.StudentRepository;
 import novi.bootcamp.schoolproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 
 import static novi.bootcamp.schoolproject.login.PasswordEncoder.EncryptPassword;
 
@@ -20,13 +23,23 @@ public class UserService {
     @Autowired
     private ParentRepository parentRepo;
 
+    @Autowired
+    private StudentRepository studentRepo;
+
 
     public void deleteUserByUsername(User user)
     {
         User tempUser = userRepo.findByUsername(user.getUsername());
-        if(tempUser.getRole().equalsIgnoreCase("Parent"))
+        switch(tempUser.getRole().toLowerCase(Locale.ROOT))
         {
-            parentRepo.deleteByUserID(tempUser.getId());
+            case "parent":
+                parentRepo.deleteByUserID(tempUser.getId());
+                break;
+            case "student":
+                studentRepo.deleteByUserID(tempUser.getId());
+                break;
+            default:
+                throw new RuntimeException("No role for user was found!");
         }
         userRepo.deleteByUsername(user.getUsername());
     }
@@ -34,9 +47,16 @@ public class UserService {
     public void saveUser(User user)
     {
         user.setPassword(EncryptPassword(user.getPassword()));
-        if(user.getRole().equalsIgnoreCase("parent"))
+        switch(user.getRole().toLowerCase(Locale.ROOT))
         {
-            saveParent(user);
+            case "parent":
+                saveParent(user);
+                break;
+            case "student":
+                saveStudent(user);
+                break;
+            default:
+                throw new RuntimeException("No role for user was found!");
         }
         userRepo.save(user);
     }
@@ -72,15 +92,32 @@ public class UserService {
             saveUser(user);
         }
     }
+    //region Parents
 
     public void saveParent(User user)
     {
         if(parentRepo.findByUserID(user.getId()) == null)
         {
-            Parent tempParent = new Parent.Builder()
+            Parent tempParent = new Parent.parentBuilder()
                     .User(user)
                     .build();
             parentRepo.save(tempParent);
         }
     }
+    //endregion
+
+    //region Students
+
+    public void saveStudent(User user)
+    {
+        if(studentRepo.findByUserID(user.getId()) == null)
+        {
+            Student tempStudent = new Student.studentBuilder()
+                    .user(user)
+                    .build();
+            studentRepo.save(tempStudent);
+        }
+    }
+    //endregion
+
 }

@@ -1,19 +1,19 @@
 package novi.bootcamp.schoolproject.repository;
 
-import novi.bootcamp.schoolproject.models.Parent;
+import novi.bootcamp.schoolproject.models.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 
-public interface ParentRepository extends JpaRepository<Parent, Integer> {
+public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-    @Query("SELECT p FROM Parent p WHERE p.user.UserID =?1")
-    Parent findByUserID(int UserID);
+    @Query("SELECT s FROM Student s WHERE s.user.UserID =?1")
+    Student findByUserID(int UserID);
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM Parent p WHERE p.user.UserID=?1")
+    @Query("DELETE FROM Student s WHERE s.user.UserID=?1")
     void deleteByUserID(int userId);
 }
