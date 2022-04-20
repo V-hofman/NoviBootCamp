@@ -34,6 +34,11 @@ public class AppController {
         return "login";
     }
 
+    @RequestMapping("/testError")
+    public void handleRequest() {
+        throw new RuntimeException("test exception");
+    }
+
 
 
 
