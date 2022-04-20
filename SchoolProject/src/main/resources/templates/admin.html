@@ -19,7 +19,9 @@
     <div> <a th:href="@{/Admin/UpdateUser}">Bestaande gebruiker aanpassen</a></div><br>
         <h2>CLASSROOM MANAGEMENT</h2>
 
-    <div> <a th:href="@{/perform_logout}">Uitloggen</a></div>
+    <form th:action="@{/logout}" method="post">
+         <button type="submit">Log uit</button>
+ </form>
     </span>
     <div>
         <p id="signature">This project was made by<br> Vincent M. Seremak</p>

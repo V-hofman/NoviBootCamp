@@ -54,13 +54,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("Username")
                 .passwordParameter("Password")
-                .defaultSuccessUrl("/Admin")
+                .defaultSuccessUrl("/Admin", true)
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/perform_logout")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/login")
                 .permitAll()
                 ;
     }
