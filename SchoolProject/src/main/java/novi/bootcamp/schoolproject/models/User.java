@@ -82,4 +82,8 @@ public class User {
 
     //endregion
 
+    //region Builder
+    //todo create a builder template for users
+    //endregion
+
 }

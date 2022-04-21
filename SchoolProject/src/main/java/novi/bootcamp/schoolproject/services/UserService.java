@@ -17,6 +17,7 @@ import static novi.bootcamp.schoolproject.login.PasswordEncoder.EncryptPassword;
 @Service
 public class UserService {
 
+    //region autowires
     @Autowired
     private UserRepository userRepo;
 
@@ -25,8 +26,9 @@ public class UserService {
 
     @Autowired
     private StudentRepository studentRepo;
+    //endregion
 
-
+    //region Standard functions
     public void deleteUserByUsername(User user)
     {
         User tempUser = userRepo.findByUsername(user.getUsername());
@@ -92,6 +94,9 @@ public class UserService {
             saveUser(user);
         }
     }
+
+    //endregion
+
     //region Parents
 
     public void saveParent(User user)
