@@ -1,0 +1,8 @@
+
+[	java:S112)"FDefine and throw a dedicated exception instead of using a generic one.(’”¹þ
+[	java:S112<"FDefine and throw a dedicated exception instead of using a generic one.(’”¹þ
+S	java:S106@"9Replace this use of System.out or System.err by a logger.(ïÓ›²ûÿÿÿÿ
+B
+java:S1905E"'Remove this unnecessary cast to "List".(ÝÙÎÝùÿÿÿÿ
+E
+java:S2201X"*The return value of "orElse" must be used.(„þØþÿÿÿÿ

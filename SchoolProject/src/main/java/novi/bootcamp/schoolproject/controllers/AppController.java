@@ -1,5 +1,6 @@
 package novi.bootcamp.schoolproject.controllers;
 
+import novi.bootcamp.schoolproject.exceptions.RoleNotFoundException;
 import novi.bootcamp.schoolproject.models.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,8 +21,7 @@ public class AppController {
     }
 
     @GetMapping("/Redirect")
-    public String redirectPage()
-    {
+    public String redirectPage() throws RoleNotFoundException {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if(principal instanceof UserDetails)
@@ -43,7 +43,7 @@ public class AppController {
                 return "redirect:/Parent";
             }else
             {
-                throw new RuntimeException("Role not found in redirect");
+                throw new RoleNotFoundException("Cant find role");
             }
         }else
         {
