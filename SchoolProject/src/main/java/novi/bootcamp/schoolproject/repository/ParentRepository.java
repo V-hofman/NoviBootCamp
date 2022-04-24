@@ -9,11 +9,17 @@ import javax.transaction.Transactional;
 
 public interface ParentRepository extends JpaRepository<Parent, Integer> {
 
+    //region single entry manipulation
+
+    //Query to find a parent from the parents table by userID
     @Query("SELECT p FROM Parent p WHERE p.user.UserID =?1")
     Parent findByUserID(int UserID);
 
+    //Here we delete a parent by userID
     @Transactional
     @Modifying
     @Query("DELETE FROM Parent p WHERE p.user.UserID=?1")
     void deleteByUserID(int userId);
+
+    //endregion
 }

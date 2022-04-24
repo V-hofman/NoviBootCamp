@@ -10,14 +10,18 @@ import javax.transaction.Transactional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    //region single entry manipulation
+
+    //Query to find users by username
     @Query("SELECT u FROM User u WHERE u.Username =?1")
     User findByUsername(String username);
 
+    //Query to delete users by username
     @Transactional
     @Modifying
     @Query("DELETE FROM User u WHERE u.Username=?1")
     void deleteByUsername(String username);
-
+    //endregion
 
 
 
