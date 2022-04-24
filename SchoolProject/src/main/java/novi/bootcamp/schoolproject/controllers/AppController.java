@@ -1,14 +1,13 @@
 package novi.bootcamp.schoolproject.controllers;
 
 import novi.bootcamp.schoolproject.models.User;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.logging.Logger;
 
 @Controller
 public class AppController {
@@ -18,6 +17,38 @@ public class AppController {
     public String viewHomePage(Model model)
     {
         return "index";
+    }
+
+    @GetMapping("/Redirect")
+    public String redirectPage()
+    {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if(principal instanceof UserDetails)
+        {
+            if(((UserDetails) principal).getAuthorities().toString().contains("ADMIN"))
+            {
+                return "redirect:/Admin";
+            }
+            if(((UserDetails) principal).getAuthorities().toString().contains("STUDENT"))
+            {
+                return "redirect:/Student";
+            }
+            if(((UserDetails) principal).getAuthorities().toString().contains("TEACHER"))
+            {
+                return "redirect:/Teacher";
+            }
+            if(((UserDetails) principal).getAuthorities().toString().contains("PARENT"))
+            {
+                return "redirect:/Parent";
+            }else
+            {
+                throw new RuntimeException("Role not found in redirect");
+            }
+        }else
+        {
+            throw new RuntimeException("Redirect page oopsie");
+        }
     }
 
     @GetMapping("/Admin")

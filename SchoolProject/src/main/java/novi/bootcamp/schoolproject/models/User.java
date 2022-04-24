@@ -1,7 +1,9 @@
 package novi.bootcamp.schoolproject.models;
 
 import javax.persistence.*;
-
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -29,6 +31,13 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Parent parent;
 
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "roles",
+            joinColumns = @JoinColumn(name = "userID"),
+            inverseJoinColumns = @JoinColumn(name = "roleID")
+            )
+    private Set<Roles> roles = new HashSet<>();
     //endregion
 
     //region Get/set
@@ -78,6 +87,42 @@ public class User {
 
     public void setParent(Parent parent) {
         this.parent = parent;
+    }
+
+    public Set<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(String role)
+    {
+        Roles tempRole = new Roles();
+        switch(role)
+        {
+            case "STUDENT":
+                tempRole.setId(1);
+                tempRole.setName(role);
+                break;
+            case "TEACHER":
+                tempRole.setId(2);
+                tempRole.setName(role);
+                break;
+            case "PARENT":
+                tempRole.setId(3);
+                tempRole.setName(role);
+                break;
+            case "ADMIN":
+                tempRole.setId(4);
+                tempRole.setName(role);
+                break;
+            default:
+                throw new RuntimeException("Role not found!");
+        }
+        this.roles.add(tempRole);
+
     }
 
     //endregion

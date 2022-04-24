@@ -1,8 +1,6 @@
 package novi.bootcamp.schoolproject.services;
 
-import novi.bootcamp.schoolproject.models.Parent;
-import novi.bootcamp.schoolproject.models.Student;
-import novi.bootcamp.schoolproject.models.User;
+import novi.bootcamp.schoolproject.models.*;
 import novi.bootcamp.schoolproject.repository.ParentRepository;
 import novi.bootcamp.schoolproject.repository.StudentRepository;
 import novi.bootcamp.schoolproject.repository.UserRepository;
@@ -25,6 +23,7 @@ public class UserService {
 
     @Autowired
     private StudentRepository studentRepo;
+
 
 
     public void deleteUserByUsername(User user)
@@ -55,10 +54,14 @@ public class UserService {
             case "student":
                 saveStudent(user);
                 break;
+            case "admin":
+                break;
             default:
                 throw new RuntimeException("No role for user was found!");
         }
+        user.addRole(user.getRole().toUpperCase(Locale.ROOT));
         userRepo.save(user);
+        System.out.println(user.getRoles());
     }
 
     public List<User> findAllUsers()

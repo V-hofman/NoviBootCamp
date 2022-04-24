@@ -1,5 +1,6 @@
 package novi.bootcamp.schoolproject.repository;
 
+import novi.bootcamp.schoolproject.models.Roles;
 import novi.bootcamp.schoolproject.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,6 +17,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("DELETE FROM User u WHERE u.Username=?1")
     void deleteByUsername(String username);
+
+
 
 
 }

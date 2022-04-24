@@ -48,13 +48,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/Admin").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("Username")
                 .passwordParameter("Password")
-                .defaultSuccessUrl("/Admin", true)
+                .defaultSuccessUrl("/Redirect", true)
                 .permitAll()
                 .and()
                 .logout()
