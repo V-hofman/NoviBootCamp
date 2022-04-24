@@ -15,6 +15,7 @@ Students can view their classes.
 Parents can see their children's classes.
 
 ## Endpoints
+### General endpoints
 ```
 [GET] / (this one is empty) 
 ```
