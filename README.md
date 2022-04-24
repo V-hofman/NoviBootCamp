@@ -30,7 +30,7 @@ Parents can see their children's classes.
 ```
 [GET] /testError (Throws an error to test the error page)
 ```
-###Admin pages, These need admin rights
+### Admin pages, These need admin rights
 ```
 [GET] /Admin/RegisterUser (Shows form to create a new user)
 ```
