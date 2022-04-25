@@ -13,11 +13,15 @@
 <div id="box">
     <p id="LoginPrompt">Keuzemenu</p>
     <span id="keuzeMenu"><h2>USER MANAGEMENT</h2>
-        <div> <a th:href="@{/Admin/ShowUsers}">Toon alle gebruikers</a></div>
-    <div> <a th:href="@{/Admin/RegisterUser}">Nieuwe Gebruiker registreren</a></div>
-    <div> <a th:href="@{/Admin/RemoveUser}">Bestaande gebruiker verwijderen</a></div>
-    <div> <a th:href="@{/Admin/UpdateUser}">Bestaande gebruiker aanpassen</a></div><br>
+        <div> <a th:href="@{/Admin/ShowUsers}">Show all users</a></div>
+        <div> <a th:href="@{/Admin/RegisterUser}">Create a new user</a></div>
+        <div> <a th:href="@{/Admin/RemoveUser}">Remove existing user</a></div>
+        <div> <a th:href="@{/Admin/UpdateUser}">Update existing user</a></div><br>
         <h2>CLASSROOM MANAGEMENT</h2>
+        <div> <a th:href="@{/Admin/ShowRooms}">Show all classrooms</a></div>
+        <div> <a th:href="@{/Admin/RegisterClass}">Create new classrooms</a></div>
+        <div> <a th:href="@{/Admin/RemoveUser}">Bestaande gebruiker verwijderen</a></div>
+        <div> <a th:href="@{/Admin/UpdateUser}">Bestaande gebruiker aanpassen</a></div><br>
 
     <form th:action="@{/logout}" method="post">
          <button type="submit">Log uit</button>

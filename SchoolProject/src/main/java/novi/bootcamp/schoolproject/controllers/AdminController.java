@@ -1,6 +1,8 @@
 package novi.bootcamp.schoolproject.controllers;
 
+import novi.bootcamp.schoolproject.models.Classrooms;
 import novi.bootcamp.schoolproject.models.User;
+import novi.bootcamp.schoolproject.services.ClassroomService;
 import novi.bootcamp.schoolproject.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,11 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ClassroomService roomService;
 
+
+    //region User Endpoints
 
     @RequestMapping( "/Admin/RegisterUser")
     public String showRegisterUserPage(Model model)
@@ -68,6 +74,38 @@ public class AdminController {
         model.addAttribute("userlist", users);
         return "ShowUsers";
     }
+
+    //endregion
+
+    //region Classroom Endpoints
+    @GetMapping("/Admin/ShowRooms")
+    public String showRooms(Model model)
+    {
+
+        List<Classrooms> rooms = roomService.findAllRooms();
+        model.addAttribute("roomList", rooms);
+        System.out.println(rooms);
+        System.out.println(rooms.get(0).getClassID());
+        return "/classrooms/showClassrooms";
+    }
+
+    @RequestMapping( "/Admin/RegisterClass")
+    public String showRegisterClassPage(Model model)
+    {
+        model.addAttribute("classroom", new Classrooms());
+        return "/classrooms/RegisterClass";
+    }
+
+    @PostMapping("/Admin/RegisterClass")
+    public String saveClass(@ModelAttribute Classrooms classrooms)
+    {
+/*        userService.saveUser(user);*/
+        return "/classrooms/RegisterClass";
+    }
+
+
+
+    //endregion
 
 
 }

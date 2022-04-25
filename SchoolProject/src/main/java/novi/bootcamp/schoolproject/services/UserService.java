@@ -3,6 +3,7 @@ package novi.bootcamp.schoolproject.services;
 import novi.bootcamp.schoolproject.models.*;
 import novi.bootcamp.schoolproject.repository.ParentRepository;
 import novi.bootcamp.schoolproject.repository.StudentRepository;
+import novi.bootcamp.schoolproject.repository.TeacherRepository;
 import novi.bootcamp.schoolproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public class UserService {
     @Autowired
     private StudentRepository studentRepo;
 
+    @Autowired
+    private TeacherRepository teacherRepo;
+
 
 
     public void deleteUserByUsername(User user)
@@ -31,6 +35,11 @@ public class UserService {
         User tempUser = userRepo.findByUsername(user.getUsername());
         switch(tempUser.getRole().toLowerCase(Locale.ROOT))
         {
+            case "admin":
+                break;
+            case "teacher":
+                teacherRepo.deleteByUserID(tempUser.getId());
+                break;
             case "parent":
                 parentRepo.deleteByUserID(tempUser.getId());
                 break;
@@ -48,6 +57,9 @@ public class UserService {
         user.setPassword(EncryptPassword(user.getPassword()));
         switch(user.getRole().toLowerCase(Locale.ROOT))
         {
+            case "teacher":
+                saveTeacher(user);
+                break;
             case "parent":
                 saveParent(user);
                 break;
@@ -61,7 +73,6 @@ public class UserService {
         }
         user.addRole(user.getRole().toUpperCase(Locale.ROOT));
         userRepo.save(user);
-        System.out.println(user.getRoles());
     }
 
     public List<User> findAllUsers()
@@ -77,7 +88,7 @@ public class UserService {
             userRepo.findById(replaceId)
                     .map(
                             newUser -> {
-                                newUser.setPassword(user.getPassword());
+                                newUser.setPassword(EncryptPassword(user.getPassword()));
                                 newUser.setUsername(user.getUsername());
                                 newUser.setPersonName(user.getPersonName());
                                 newUser.setRole(user.getRole());
@@ -105,6 +116,20 @@ public class UserService {
                     .User(user)
                     .build();
             parentRepo.save(tempParent);
+        }
+    }
+    //endregion
+
+    //region Teachers
+
+    public void saveTeacher(User user)
+    {
+        if(teacherRepo.findByUserID(user.getId())== null)
+        {
+            Teacher tempTeacher = new Teacher.TeacherBuilder()
+                    .user(user)
+                    .build();
+            teacherRepo.save(tempTeacher);
         }
     }
     //endregion

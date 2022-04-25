@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link th:href="@{../css/mainstyle.css}" href="../../static/css/mainstyle.css"
+          rel="stylesheet" type="text/css" media="screen"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>School Agenda</title>
+</head>
+
+<body>
+
+<div id="box">
+    <p id="LoginPrompt">Register User</p>
+    <form id="boxRegister" th:action="@{/Admin/RegisterClass}" th:object="${classroom}" method="post">
+        <table>
+            <tr><td class="InputList">
+                <label for="courseName">Course name:</label></br>
+                <input name="username" type="text" id="courseName" autocomplete="off" placeholder="Course name" required
+                       minlength="=2" maxlength="20" th:field="*{className}"></br>
+                <label for="Roomnr">Course name:</label></br>
+                <input name="username" type="text" id="Roomnr" autocomplete="off" placeholder="Room Number" required
+                       minlength="=2" maxlength="20" th:field="*{classroomNR}"></br>
+
+                </br><br>
+            </td></tr></table>
+        <input id="submitRegister" type="submit" value="Registreer"></br>
+    </form>
+    <div>
+        <p id="signature">This project was made by<br> Vincent M. Seremak</p>
+    </div>
+    <div> <a align="center" th:href="@{/Admin}">Ga terug</a></div>
+</div>
+
+<div id="logo">
+    <img th:src="@{../imgs/noviLogo.png}"/>
+</div>
+
+</body>
+
+</html>
