@@ -26,6 +26,7 @@ public class Classrooms {
     @Column(name = "ClassRoomNR")
     private String classroomNR;
 
+
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "classroomstudent",
@@ -76,6 +77,7 @@ public class Classrooms {
     public void setClassroomNR(String classRoomNR) {
         this.classroomNR = classRoomNR;
     }
+
 
     public String getTeacherName()
     {

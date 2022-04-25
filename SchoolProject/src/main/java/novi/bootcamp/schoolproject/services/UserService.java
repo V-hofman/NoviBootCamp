@@ -29,7 +29,6 @@ public class UserService {
     private TeacherRepository teacherRepo;
 
 
-
     public void deleteUserByUsername(User user)
     {
         User tempUser = userRepo.findByUsername(user.getUsername());
@@ -131,6 +130,11 @@ public class UserService {
                     .build();
             teacherRepo.save(tempTeacher);
         }
+    }
+
+    public Teacher findTeacherByName(String name)
+    {
+        return teacherRepo.findByName(name);
     }
     //endregion
 

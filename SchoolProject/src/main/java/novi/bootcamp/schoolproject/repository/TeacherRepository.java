@@ -18,4 +18,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
     @Modifying
     @Query("DELETE FROM Teacher t WHERE t.user.UserID=?1")
     void deleteByUserID(int userId);
+
+    @Query("SELECT t FROM Teacher t WHERE t.user.PersonName =?1")
+    Teacher findByName(String name);
 }

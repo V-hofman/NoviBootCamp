@@ -4,6 +4,7 @@ import novi.bootcamp.schoolproject.models.Classrooms;
 import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.services.ClassroomService;
 import novi.bootcamp.schoolproject.services.UserService;
+import novi.bootcamp.schoolproject.wrappers.ClassRoomCreateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,14 +93,18 @@ public class AdminController {
     @RequestMapping( "/Admin/RegisterClass")
     public String showRegisterClassPage(Model model)
     {
-        model.addAttribute("classroom", new Classrooms());
+        model.addAttribute("classroom",new ClassRoomCreateForm());
         return "/classrooms/RegisterClass";
     }
 
     @PostMapping("/Admin/RegisterClass")
-    public String saveClass(@ModelAttribute Classrooms classrooms)
+    public String saveClass(@ModelAttribute("classroom") ClassRoomCreateForm classroom)
     {
+        Classrooms tempRoom = classroom.createClassRoom(classroom);
+       /* userService.findTeacherByName(rooms.getTeachName());*/
 /*        userService.saveUser(user);*/
+        System.out.println(tempRoom.getClassID());
+        System.out.println(tempRoom.getTeacher());
         return "/classrooms/RegisterClass";
     }
 
