@@ -1,16 +1,20 @@
 package novi.bootcamp.schoolproject.controllers;
 
+import novi.bootcamp.schoolproject.exceptions.TeacherNotFoundException;
 import novi.bootcamp.schoolproject.models.Classrooms;
+import novi.bootcamp.schoolproject.models.Student;
+import novi.bootcamp.schoolproject.models.Teacher;
 import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.services.ClassroomService;
 import novi.bootcamp.schoolproject.services.UserService;
-import novi.bootcamp.schoolproject.wrappers.ClassRoomCreateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -29,42 +33,42 @@ public class AdminController {
     public String showRegisterUserPage(Model model)
     {
         model.addAttribute("user", new User());
-        return "RegisterUser";
+        return "/admin/RegisterUser";
     }
 
     @PostMapping("/Admin/RegisterUser")
     public String savePerson(@ModelAttribute User user)
     {
         userService.saveUser(user);
-        return "RegisterUser";
+        return "/admin/admin";
     }
 
     @RequestMapping("/Admin/RemoveUser")
     public String showRemoveUserPage(Model model)
     {
         model.addAttribute("user", new User());
-        return "RemoveUser";
+        return "/admin/RemoveUser";
     }
 
     @PostMapping("/Admin/RemoveUser")
     public String removePerson(@ModelAttribute User user)
     {
         userService.deleteUserByUsername(user);
-        return "RemoveUser";
+        return "/admin/admin";
     }
 
     @RequestMapping("/Admin/UpdateUser")
     public String showUpdateUserPage(Model model)
     {
         model.addAttribute("user", new User());
-        return "UpdateUser";
+        return "/admin/UpdateUser";
     }
 
     @PostMapping("/Admin/UpdateUser")
     public String updateUser(@ModelAttribute User user)
     {
         userService.updateUser(user);
-        return "UpdateUser";
+        return "/admin/admin";
     }
 
     @GetMapping("/Admin/ShowUsers")
@@ -73,7 +77,7 @@ public class AdminController {
 
         List<User> users = userService.findAllUsers();
         model.addAttribute("userlist", users);
-        return "ShowUsers";
+        return "/admin/ShowUsers";
     }
 
     //endregion
@@ -85,27 +89,49 @@ public class AdminController {
 
         List<Classrooms> rooms = roomService.findAllRooms();
         model.addAttribute("roomList", rooms);
-        System.out.println(rooms);
-        System.out.println(rooms.get(0).getClassID());
+        Student tempStudent = userService.findByUsername("Student");
+        rooms.get(0).addStudent(tempStudent);
+        roomService.saveClassroom(rooms.get(0));
+        rooms.get(0).setClassID(rooms.get(0).getClassID()+1);
+        System.out.println(rooms.get(0).getStudents());
         return "/classrooms/showClassrooms";
     }
 
     @RequestMapping( "/Admin/RegisterClass")
     public String showRegisterClassPage(Model model)
     {
-        model.addAttribute("classroom",new ClassRoomCreateForm());
+        model.addAttribute("classroom", new Classrooms());
+        model.addAttribute("teacher", new Teacher());
         return "/classrooms/RegisterClass";
     }
 
     @PostMapping("/Admin/RegisterClass")
-    public String saveClass(@ModelAttribute("classroom") ClassRoomCreateForm classroom)
+    public String saveClass(
+            @ModelAttribute("classroom") Classrooms classroom,
+            @ModelAttribute("teacher") Teacher teacher
+            ) throws TeacherNotFoundException {
+        Teacher tempTeacher = userService.findTeacherByName(teacher.getUser().getPersonName());
+        if(tempTeacher == null)
+        {
+            throw new TeacherNotFoundException("Teacher does not exist or spelled wrong!");
+        }
+        classroom.setTeacher(tempTeacher);
+        roomService.saveClassroom(classroom);
+        return "/admin/admin";
+    }
+
+    @GetMapping("/Admin/RemoveClass")
+    public String showRemoveClassPage(Model model)
     {
-        Classrooms tempRoom = classroom.createClassRoom(classroom);
-       /* userService.findTeacherByName(rooms.getTeachName());*/
-/*        userService.saveUser(user);*/
-        System.out.println(tempRoom.getClassID());
-        System.out.println(tempRoom.getTeacher());
-        return "/classrooms/RegisterClass";
+        model.addAttribute("classroom", new Classrooms());
+        return "/classrooms/RemoveClass";
+    }
+
+    @PostMapping("/Admin/RemoveClass")
+    public String removeClass(@ModelAttribute Classrooms room)
+    {
+        roomService.removeClassroomByID(room.getClassID());
+        return "/admin/admin";
     }
 
 

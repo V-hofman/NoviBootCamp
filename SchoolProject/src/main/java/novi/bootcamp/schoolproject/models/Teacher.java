@@ -2,10 +2,11 @@ package novi.bootcamp.schoolproject.models;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "teacher")
-public class Teacher {
+public class Teacher implements Serializable {
 
     //region Variables
     @Id

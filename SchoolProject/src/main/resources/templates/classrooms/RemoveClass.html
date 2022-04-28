@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:align="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{../css/mainstyle.css}" href="../../static/css/mainstyle.css"
+          rel="stylesheet" type="text/css" media="screen"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>School Agenda</title>
+</head>
+
+<body>
+
+<div id="box">
+    <p id="LoginPrompt">Remove Classroom</p>
+    <form id="boxRegister" th:action="@{/Admin/RemoveClass}"  method="post" style="text-align:center">
+               <input name="username" type="text" id="username" autocomplete="off" placeholder="Classroom ID" required
+                       minlength="=2" maxlength="20" th:field="*{classroom.classID}"><br><br><br><br>
+        <input type="checkbox" name="check" value="2" required>
+        <span class="riskPopUp">I have read the risks of removal<span class="tooltiptext">A classroom that is removed cannot be restored!</span></span><br><br><br>
+        <input id="submitDelete" type="submit" value="REMOVE"><br>
+    </form>
+    <div>
+        <p id="signature">This project was made by<br> Vincent M. Seremak</p>
+    </div>
+    <div> <a align="center" th:href="@{/Admin}">Ga terug</a></div>
+</div>
+
+<div id="logo">
+    <img th:src="@{../imgs/noviLogo.png}"/>
+</div>
+
+</body>
+
+</html>

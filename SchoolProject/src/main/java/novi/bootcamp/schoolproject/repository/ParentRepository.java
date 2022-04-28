@@ -21,5 +21,8 @@ public interface ParentRepository extends JpaRepository<Parent, Integer> {
     @Query("DELETE FROM Parent p WHERE p.user.UserID=?1")
     void deleteByUserID(int userId);
 
+    @Query("SELECT p FROM Parent p WHERE p.user.PersonName =?1")
+    Parent findByName(String name);
+
     //endregion
 }

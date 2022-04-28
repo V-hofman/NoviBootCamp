@@ -1,6 +1,5 @@
 package novi.bootcamp.schoolproject.exceptions;
 
-import net.bytebuddy.implementation.bytecode.Throw;
 
 public class RoleNotFoundException extends Exception{
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link th:href="@{../css/mainstyle.css}" href="../static/css/mainstyle.css"
+    <link th:href="@{../css/mainstyle.css}" href="../../static/css/mainstyle.css"
           rel="stylesheet" type="text/css" media="screen"/>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
@@ -11,19 +11,16 @@
 <body>
 
 <div id="box">
-    <p id="LoginPrompt">Update User</p>
-    <form id="boxRegister" th:action="@{/Admin/UpdateUser}" th:object="${user}" method="post">
+    <p id="LoginPrompt">Register User</p>
+    <form id="boxRegister" th:action="@{/Admin/RegisterUser}" th:object="${user}" method="post">
         <table>
             <tr><td class="InputList">
-                <label for="username">Username:</label></br>
-                <input name="username" type="text" id="username" autocomplete="off" placeholder="Username" required
-                       minlength="=2" maxlength="20" th:field="*{Username}"></br>
-                <label for="password">Password:</label></br>
-                <input name="password" type="password" id="password" placeholder="Password" required
-                       minlength="=2" maxlength="64" th:field="*{Password}"></br>
-                <label for="fullName">Password:</label></br>
-                <input name="fullName" type="text" id="fullName" placeholder="volledige naam"
-                       minlength="=2" maxlength="64" th:field="*{PersonName}"></br><br>
+            <label for="username">Username:</label></br>
+            <input name="username" type="text" id="username" autocomplete="off" placeholder="Course" required
+                   minlength="=2" maxlength="20" th:field="*{Username}"></br>
+            <label for="password">Password:</label></br>
+            <input name="password" type="password" id="password" placeholder="Password" required
+                   minlength="=2" maxlength="64" th:field="*{Password}"></br><br>
             </td><td class="RadioList">
                 <div class="CenterList">
                     <input type="radio" id="admin" name="role_type" value="Admin" th:field="*{role}" required>
@@ -36,7 +33,7 @@
                     <label for="ouder">Ouder/Voogd</label><br>
                 </div>
             </td></tr></table>
-        <input id="submitRegister" type="submit" value="Update"></br>
+        <input id="submitRegister" type="submit" value="Registreer"></br>
     </form>
     <div>
         <p id="signature">This project was made by<br> Vincent M. Seremak</p>

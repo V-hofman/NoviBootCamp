@@ -2,7 +2,6 @@ package novi.bootcamp.schoolproject.controllers;
 
 import novi.bootcamp.schoolproject.exceptions.RoleNotFoundException;
 import novi.bootcamp.schoolproject.models.User;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -55,7 +54,7 @@ public class AppController {
     public String showAdminPage(Model model)
     {
         model.addAttribute("user", new User());
-        return "admin";
+        return "/admin/admin";
     }
 
     @RequestMapping("/login")

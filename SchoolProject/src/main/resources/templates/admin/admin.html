@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link th:href="@{css/mainstyle.css}" href="../static/css/mainstyle.css"
+    <link th:href="@{css/mainstyle.css}" href="../../static/css/mainstyle.css"
           rel="stylesheet" type="text/css" media="screen"/>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
         <h2>CLASSROOM MANAGEMENT</h2>
         <div> <a th:href="@{/Admin/ShowRooms}">Show all classrooms</a></div>
         <div> <a th:href="@{/Admin/RegisterClass}">Create new classrooms</a></div>
-        <div> <a th:href="@{/Admin/RemoveUser}">Bestaande gebruiker verwijderen</a></div>
+        <div> <a th:href="@{/Admin/RemoveClass}">Remove existing classroom</a></div>
         <div> <a th:href="@{/Admin/UpdateUser}">Bestaande gebruiker aanpassen</a></div><br>
 
     <form th:action="@{/logout}" method="post">

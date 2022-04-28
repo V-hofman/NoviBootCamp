@@ -1,4 +1,4 @@
-package novi.bootcamp.schoolproject;
+package novi.bootcamp.schoolproject.repositorytest;
 
 import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.repository.UserRepository;
@@ -23,25 +23,22 @@ public class UserRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
 
+    private User user = createTestUser();
 
 
     @Test
     @Order(1)
     public void testCreateUser()
     {
-        User user = createTestUser();
-
         User savedUser = repo.save(user);
-
         User existUser = entityManager.find(User.class, savedUser.getId());
-
         assertThat(existUser.getUsername().equals(savedUser.getUsername()));
     }
 
     @Test
     @Order(2)
     public void testFindByUsername()
-    {  User user = createTestUser();
+    {
        user = repo.findByUsername(user.getUsername());
        assertThat(user).isNotNull();
     }
@@ -50,8 +47,6 @@ public class UserRepositoryTest {
     @Order(3)
     public void TestDeleteUser()
     {
-        User user = createTestUser();
-
         repo.deleteByUsername(user.getUsername());
         assertThat(repo.findByUsername(user.getUsername())).isNull();
     }

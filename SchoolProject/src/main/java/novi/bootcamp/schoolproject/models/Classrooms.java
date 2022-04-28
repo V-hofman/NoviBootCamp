@@ -85,4 +85,12 @@ public class Classrooms {
     }
 
     //endregion
+
+    //region Functions
+
+    public void addStudent(Student student)
+    {
+        this.students.add(student);
+    }
+    //endregion
 }

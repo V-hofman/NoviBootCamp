@@ -21,5 +21,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query("DELETE FROM Student s WHERE s.user.UserID=?1")
     void deleteByUserID(int userId);
 
+    @Query("SELECT s FROM Student s WHERE s.user.Username =?1")
+    Student findByUsername(String username);
+
     //endregion
 }

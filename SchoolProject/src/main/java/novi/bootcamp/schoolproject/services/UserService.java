@@ -150,6 +150,11 @@ public class UserService {
             studentRepo.save(tempStudent);
         }
     }
+
+    public Student findByUsername(String username)
+    {
+        return studentRepo.findByUsername(username);
+    }
     //endregion
 
 }
