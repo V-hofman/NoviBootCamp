@@ -89,11 +89,6 @@ public class AdminController {
 
         List<Classrooms> rooms = roomService.findAllRooms();
         model.addAttribute("roomList", rooms);
-        Student tempStudent = userService.findByUsername("Student");
-        rooms.get(0).addStudent(tempStudent);
-        roomService.saveClassroom(rooms.get(0));
-        rooms.get(0).setClassID(rooms.get(0).getClassID()+1);
-        System.out.println(rooms.get(0).getStudents());
         return "/classrooms/showClassrooms";
     }
 

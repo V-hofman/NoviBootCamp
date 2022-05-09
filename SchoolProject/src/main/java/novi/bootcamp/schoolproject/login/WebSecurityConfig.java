@@ -40,16 +40,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception
     {
-        web.ignoring().antMatchers("/css/**");
-        web.ignoring().antMatchers("/font/**");
-        web.ignoring().antMatchers("/imgs/**");
+
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .httpBasic()
+                .and()
                 .authorizeRequests()
-                .antMatchers("/Admin").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers("/css/**", "/font/**", "/imgs/**")
+                .permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/Admin/**").hasAuthority("ADMIN")
+                .antMatchers("/Student/**").hasAnyAuthority("STUDENT", "ADMIN")
+                .anyRequest()
+                .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
