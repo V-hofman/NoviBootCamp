@@ -8,6 +8,20 @@ import java.util.Set;
 @Table(name = "classroom")
 public class Classrooms {
 
+    public Classrooms()
+    {
+
+    }
+
+    public Classrooms(roomBuilder builder)
+    {
+        this.className = builder.className;
+        this.classroomNR = builder.classRoom;
+        this.students = builder.students;
+        this.ClassID = builder.classID;
+        this.teacher = builder.teacher;
+    }
+
     //region Variables
 
     @Id
@@ -92,5 +106,51 @@ public class Classrooms {
     {
         this.students.add(student);
     }
+    //endregion
+
+    //region Builder
+    public static class roomBuilder
+    {
+        private int classID;
+        private String className;
+        private String classRoom;
+        private Teacher teacher;
+        private Set<Student> students = new HashSet<>();
+
+        public roomBuilder()
+        {
+
+        }
+
+        public roomBuilder classID(int classID)
+        {
+            this.classID = classID;
+            return this;
+        }
+
+        public roomBuilder className(String className)
+        {
+            this.className = className;
+            return this;
+        }
+
+        public roomBuilder classRoom(String classRoom)
+        {
+            this.classRoom = classRoom;
+            return this;
+        }
+
+        public roomBuilder students(Set<Student> students)
+        {
+            this.students = students;
+            return this;
+        }
+
+        public Classrooms build()
+        {
+            return new Classrooms(this);
+        }
+    }
+
     //endregion
 }

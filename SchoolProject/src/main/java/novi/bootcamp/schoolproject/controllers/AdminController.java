@@ -105,6 +105,7 @@ public class AdminController {
             @ModelAttribute("classroom") Classrooms classroom,
             @ModelAttribute("teacher") Teacher teacher
             ) throws TeacherNotFoundException {
+        System.out.println(teacher.getUser().getPersonName());
         Teacher tempTeacher = userService.findTeacherByName(teacher.getUser().getPersonName());
         if(tempTeacher == null)
         {
