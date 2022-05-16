@@ -3,6 +3,7 @@ package novi.bootcamp.schoolproject.endpointtest;
 import novi.bootcamp.schoolproject.models.Classrooms;
 import novi.bootcamp.schoolproject.models.Teacher;
 import novi.bootcamp.schoolproject.models.User;
+import novi.bootcamp.schoolproject.repository.ClassroomRespitory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -126,6 +127,16 @@ public class AdminControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
                 .andReturn();
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/Admin/RemoveUser")
+                        .param("username", tempUser.getUsername())
+                        .param("password", tempUser.getPassword())
+                        .param("personName", tempUser.getPersonName())
+                        .param("role", tempUser.getRole())
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
+                .andReturn();
     }
 
     //endregion
@@ -179,6 +190,19 @@ public class AdminControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
                 .andReturn();
+    }
+
+    @Test
+    @WithMockUser(value = "admin", authorities = "ADMIN")
+    void shouldRemoveClassRoomAndReturnAdminView() throws Exception
+    {
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/Admin/RemoveClass")
+                        .flashAttr("room", tempClass))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
+                .andReturn();
+
     }
     //endregion
 
