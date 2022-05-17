@@ -40,7 +40,7 @@ public class AdminController {
     public String savePerson(@ModelAttribute User user)
     {
         userService.saveUser(user);
-        return "/admin/admin";
+        return "redirect:/Admin";
     }
 
     @RequestMapping("/Admin/RemoveUser")
@@ -54,7 +54,7 @@ public class AdminController {
     public String removePerson(@ModelAttribute User user)
     {
         userService.deleteUserByUsername(user);
-        return "/admin/admin";
+        return "redirect:/Admin";
     }
 
     @RequestMapping("/Admin/UpdateUser")
@@ -68,7 +68,7 @@ public class AdminController {
     public String updateUser(@ModelAttribute User user)
     {
         userService.updateUser(user);
-        return "/admin/admin";
+        return "redirect:/Admin";
     }
 
     @GetMapping("/Admin/ShowUsers")
@@ -113,7 +113,7 @@ public class AdminController {
         }
         classroom.setTeacher(tempTeacher);
         roomService.saveClassroom(classroom);
-        return "/admin/admin";
+        return "redirect:/Admin";
     }
 
     @GetMapping("/Admin/RemoveClass")
@@ -127,7 +127,7 @@ public class AdminController {
     public String removeClass(@ModelAttribute Classrooms room)
     {
         roomService.removeClassroomByID(room.getClassID());
-        return "/admin/admin";
+        return "redirect:/Admin";
     }
 
 

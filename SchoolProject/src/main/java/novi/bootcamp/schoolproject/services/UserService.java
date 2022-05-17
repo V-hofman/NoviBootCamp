@@ -51,6 +51,11 @@ public class UserService {
         userRepo.deleteByUsername(user.getUsername());
     }
 
+    public User getUserByUserName(String username)
+    {
+        return userRepo.findByUsername(username);
+    }
+
     public void saveUser(User user)
     {
         user.setPassword(EncryptPassword(user.getPassword()));
