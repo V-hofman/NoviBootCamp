@@ -14,11 +14,8 @@
   <p id="LoginPrompt">Keuzemenu</p>
   <span id="keuzeMenu"><h2>USER MANAGEMENT</h2>
         <div> <a th:href="@{/Student/ShowDetails}">Show your details</a></div>
-        <div> <a th:href="@{/Student/UpdateUser}">Change your details</a></div>
         <h2>CLASSROOM MANAGEMENT</h2>
-        <div> <a th:href="@{/Admin/ShowRooms}">Show all classrooms</a></div>
-        <div> <a th:href="@{/Admin/RegisterClass}">Create new classrooms</a></div>
-        <div> <a th:href="@{/Admin/RemoveClass}">Remove existing classroom</a></div>
+        <div> <a th:href="@{/Student/ShowRooms}">Show all classrooms</a></div>
 
     <form th:action="@{/logout}" method="post">
          <button type="submit">Log uit</button>

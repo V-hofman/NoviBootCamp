@@ -75,7 +75,10 @@ public class UserService {
             default:
                 throw new RuntimeException("No role for user was found!");
         }
-        user.addRole(user.getRole().toUpperCase(Locale.ROOT));
+        if(user.getRoles().isEmpty())
+        {
+            user.addRole(user.getRole().toUpperCase(Locale.ROOT));
+        }
         userRepo.save(user);
     }
 

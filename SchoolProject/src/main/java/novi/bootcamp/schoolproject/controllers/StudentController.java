@@ -1,5 +1,6 @@
 package novi.bootcamp.schoolproject.controllers;
 
+import novi.bootcamp.schoolproject.models.Classrooms;
 import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.services.ClassroomService;
 import novi.bootcamp.schoolproject.services.UserService;
@@ -8,9 +9,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -59,11 +63,19 @@ public class StudentController {
         System.out.println(user.getUsername());
         if(user.getUsername().equals(username))
         {
-            System.out.println("good one");
-
-            userService.updateUser(user);
+            User currentUser = userService.getUserByUserName(((UserDetails) principal).getUsername());
+            userService.updateUser(currentUser);
         }
         return "redirect:/Student";
     }
     //endregion
+
+    @GetMapping("/Student/ShowRooms")
+    public String showRooms(Model model)
+    {
+
+        List<Classrooms> rooms = roomService.findAllRooms();
+        model.addAttribute("roomList", rooms);
+        return "/classrooms/showClassrooms";
+    }
 }

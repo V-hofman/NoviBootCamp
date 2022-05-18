@@ -7,7 +7,7 @@ public class PasswordEncoder {
 
     public static void main(String[] args)
     {
-        String rawPassword = "1235";
+        String rawPassword = "student";
         String encodedPassword = encoder.encode(rawPassword);
 
         System.out.println(encodedPassword);
