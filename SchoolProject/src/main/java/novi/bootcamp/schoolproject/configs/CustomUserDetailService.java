@@ -1,4 +1,4 @@
-package novi.bootcamp.schoolproject.login;
+package novi.bootcamp.schoolproject.configs;
 
 import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.repository.UserRepository;

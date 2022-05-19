@@ -1,9 +1,7 @@
 package novi.bootcamp.schoolproject.endpointtest;
 
 import novi.bootcamp.schoolproject.models.Classrooms;
-import novi.bootcamp.schoolproject.models.Teacher;
 import novi.bootcamp.schoolproject.models.User;
-import novi.bootcamp.schoolproject.repository.ClassroomRespitory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,7 +21,6 @@ public class AdminControllerTest {
 
     User tempUser = createTestUser();
     Classrooms tempClass = createTestRoom();
-    Teacher tempTeacher = createTestTeacher();
 
     //region userPages
 
@@ -185,8 +182,7 @@ public class AdminControllerTest {
     void shouldRegisterClassRoomAndReturnAdminView() throws Exception {
         this.mockMvc
                 .perform(MockMvcRequestBuilders.post("/Admin/RegisterClass")
-                        .flashAttr("classroom", tempClass)
-                        .flashAttr("teacher", tempTeacher))
+                        .flashAttr("classroom", tempClass))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
                 .andReturn();
@@ -219,21 +215,14 @@ public class AdminControllerTest {
         return user;
     }
 
-    public Teacher createTestTeacher()
-    {
-        User teachUser = createTestUser();
-        teachUser.setRole("Teacher");
-        Teacher teacher = new Teacher.TeacherBuilder()
-                .user(teachUser)
-                .build();
-        return teacher;
-    }
 
     public Classrooms createTestRoom()
     {
         Classrooms room = new Classrooms.roomBuilder()
                 .classRoom("12")
                 .className("Math")
+                .classDate("12-11-2021")
+                .classTeacher("Pieter")
                 .build();
         return room;
     }

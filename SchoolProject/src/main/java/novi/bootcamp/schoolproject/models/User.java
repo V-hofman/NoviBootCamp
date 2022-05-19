@@ -28,8 +28,9 @@ public class User {
     @Column(nullable = false, name="role")
     private String role;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Parent parent;
+    @Column(name = "userPic")
+    private String picture;
+
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
@@ -73,20 +74,30 @@ public class User {
         this.PersonName = personName;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    @Transient
+    public String getImagePath()
+    {
+        if(this.picture == null)
+        {
+            return null;
+        }
+        return "user-photos/" + getId() + "/" + this.picture;
+    }
+
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public Parent getParent() {
-        return parent;
-    }
-
-    public void setParent(Parent parent) {
-        this.parent = parent;
     }
 
     public Set<Roles> getRoles() {
@@ -106,14 +117,6 @@ public class User {
                 tempRole.setId(1);
                 tempRole.setName(role);
                 break;
-            case "TEACHER":
-                tempRole.setId(2);
-                tempRole.setName(role);
-                break;
-            case "PARENT":
-                tempRole.setId(3);
-                tempRole.setName(role);
-                break;
             case "ADMIN":
                 tempRole.setId(4);
                 tempRole.setName(role);
@@ -125,10 +128,6 @@ public class User {
 
     }
 
-    //endregion
-
-    //region Builder
-    //todo create a builder template for users
     //endregion
 
 }

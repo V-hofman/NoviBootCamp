@@ -12,6 +12,7 @@
 
 <div id="box">
     <p id="LoginPrompt">Register User</p>
+    <img th:src="@{/{id}(id = ${user.getImagePath()})}" width="100" height="100" />
     <table class="dataTable">
         <tr><td>
         <tr>
@@ -30,6 +31,14 @@
         </td>
         </tr></table>
     <br>
+    <div>
+        <form th:action="@{/Student/ShowDetails}" th:object="${user}" method="post" enctype="multipart/form-data">
+            <label>Photos: </label>
+            <input type="file" name="image" accept="image/png, image/jpeg" />
+            <input id="submitRegister" type="submit" value="Upload Photo"></br>
+        </form>
+
+    </div>
     <div>
         <p id="signature">This project was made by<br> Vincent M. Seremak</p>
     </div>

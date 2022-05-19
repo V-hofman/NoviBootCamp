@@ -1,4 +1,4 @@
-package novi.bootcamp.schoolproject.login;
+package novi.bootcamp.schoolproject.configs;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

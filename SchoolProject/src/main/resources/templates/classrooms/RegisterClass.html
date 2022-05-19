@@ -11,7 +11,7 @@
 <body>
 
 <div id="box">
-    <p id="LoginPrompt">Register User</p>
+    <p id="LoginPrompt">Register Class</p>
     <form id="boxRegister" th:action="@{/Admin/RegisterClass}" method="post">
         <table>
             <tr><td class="InputList">
@@ -21,9 +21,12 @@
                 <label for="Roomnr">Room location</label></br>
                 <input name="classroomNR" type="text" id="Roomnr" autocomplete="off" placeholder="Room Number" required
                        minlength="=2" maxlength="20" th:field="*{classroom.classroomNR}"></br>
-                <label for="teachName">Teacher's full name</label></br>
+                <label for="teachName">Teacher's name</label></br>
                 <input name="teachName" type="text" id="teachName" autocomplete="off" placeholder="Teacher's full name" required
-                       minlength="=2" maxlength="20" th:field="*{teacher.user.personName}"></br>
+                       minlength="=2" maxlength="45" th:field="*{classroom.classTeacher}"></br>
+                <label for="classDate">Classroom date</label></br>
+                <input name="classDate" type="text" id="classDate" autocomplete="off" placeholder="Date for class" required
+                       minlength="=2" maxlength="45" th:field="*{classroom.classDate}"></br>
 
                 </br><br>
             </td></tr></table>

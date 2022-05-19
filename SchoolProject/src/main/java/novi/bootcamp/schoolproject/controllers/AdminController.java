@@ -1,9 +1,6 @@
 package novi.bootcamp.schoolproject.controllers;
 
-import novi.bootcamp.schoolproject.exceptions.TeacherNotFoundException;
 import novi.bootcamp.schoolproject.models.Classrooms;
-import novi.bootcamp.schoolproject.models.Student;
-import novi.bootcamp.schoolproject.models.Teacher;
 import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.services.ClassroomService;
 import novi.bootcamp.schoolproject.services.UserService;
@@ -12,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Controller
@@ -96,22 +91,14 @@ public class AdminController {
     public String showRegisterClassPage(Model model)
     {
         model.addAttribute("classroom", new Classrooms());
-        model.addAttribute("teacher", new Teacher());
         return "/classrooms/RegisterClass";
     }
 
     @PostMapping("/Admin/RegisterClass")
     public String saveClass(
-            @ModelAttribute("classroom") Classrooms classroom,
-            @ModelAttribute("teacher") Teacher teacher
-            ) throws TeacherNotFoundException {
-        System.out.println(teacher.getUser().getPersonName());
-        Teacher tempTeacher = userService.findTeacherByName(teacher.getUser().getPersonName());
-        if(tempTeacher == null)
-        {
-            throw new TeacherNotFoundException("Teacher does not exist or spelled wrong!");
-        }
-        classroom.setTeacher(tempTeacher);
+            @ModelAttribute("classroom") Classrooms classroom
+            )
+    {
         roomService.saveClassroom(classroom);
         return "redirect:/Admin";
     }

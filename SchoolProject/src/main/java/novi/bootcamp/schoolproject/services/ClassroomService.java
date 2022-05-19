@@ -30,9 +30,4 @@ public class ClassroomService {
         classRepo.deleteClassroomsByClassID(ID);
     }
 
-    public void addStudent(Set<Student> student, Classrooms room)
-    {
-        room.setStudents(student);
-        classRepo.save(room);
-    }
 }

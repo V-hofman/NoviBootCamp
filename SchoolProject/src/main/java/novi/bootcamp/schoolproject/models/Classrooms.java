@@ -17,9 +17,7 @@ public class Classrooms {
     {
         this.className = builder.className;
         this.classroomNR = builder.classRoom;
-        this.students = builder.students;
         this.ClassID = builder.classID;
-        this.teacher = builder.teacher;
     }
 
     //region Variables
@@ -29,25 +27,17 @@ public class Classrooms {
     @Column(nullable = false, unique = true,name = "ClassID")
     private int ClassID;
 
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Teacher_TeachID", referencedColumnName = "TeachID")
-    private Teacher teacher;
-
-    @Column(name = "ClassName")
+    @Column(name = "ClassName", length = 45)
     private String className;
 
     @Column(name = "ClassRoomNR")
     private String classroomNR;
 
+    @Column(name = "ClassDate", length = 45)
+    private String classDate;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "classroomstudent",
-            joinColumns = @JoinColumn(name = "classroom_classroomID"),
-            inverseJoinColumns = @JoinColumn(name = "student_user_userID")
-    )
-    private Set<Student> students = new HashSet<>();
+    @Column(name = "ClassTeacher", length = 45)
+    private String classTeacher;
     //endregion
 
     //region Getters/setters
@@ -60,21 +50,6 @@ public class Classrooms {
         ClassID = classID;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
-    public Set<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
 
     public String getClassName() {
         return className;
@@ -92,21 +67,24 @@ public class Classrooms {
         this.classroomNR = classRoomNR;
     }
 
+    public String getClassDate() {
+        return classDate;
+    }
 
-    public String getTeacherName()
-    {
-        return this.teacher.getUser().getPersonName();
+    public void setClassDate(String classDate) {
+        this.classDate = classDate;
+    }
+
+    public String getClassTeacher() {
+        return classTeacher;
+    }
+
+    public void setClassTeacher(String classTeacher) {
+        this.classTeacher = classTeacher;
     }
 
     //endregion
 
-    //region Functions
-
-    public void addStudent(Student student)
-    {
-        this.students.add(student);
-    }
-    //endregion
 
     //region Builder
     public static class roomBuilder
@@ -114,8 +92,8 @@ public class Classrooms {
         private int classID;
         private String className;
         private String classRoom;
-        private Teacher teacher;
-        private Set<Student> students = new HashSet<>();
+        private String classTeacher;
+        private String classDate;
 
         public roomBuilder()
         {
@@ -140,9 +118,16 @@ public class Classrooms {
             return this;
         }
 
-        public roomBuilder students(Set<Student> students)
+
+        public roomBuilder classTeacher(String classTeacher)
         {
-            this.students = students;
+            this.classTeacher = classTeacher;
+            return this;
+        }
+
+        public roomBuilder classDate(String classDate)
+        {
+            this.classDate = classDate;
             return this;
         }
 

@@ -16,6 +16,8 @@ public class Student {
     @JoinColumn(name = "userID", referencedColumnName = "userID")
     private User user;
 
+
+
     //endregion
 
     //region Constructors

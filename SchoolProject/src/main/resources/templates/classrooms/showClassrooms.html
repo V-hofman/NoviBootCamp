@@ -19,15 +19,15 @@
             <th>Name Teacher</th>
             <th>Course</th>
             <th>Location</th>
-            <th>Students</th>
+            <th>Date</th>
 
         </tr>
         <tr th:each = "rooms : ${roomList}">
             <td class="tableData" th:text="${rooms.getClassID()}"></td>
-            <td class="tableData" th:text="${rooms.getTeacherName()}"></td>
+            <td class="tableData" th:text="${rooms.getClassTeacher()}"></td>
             <td class="tableData" th:text="${rooms.getClassName()}"></td>
             <td class="tableData" th:text="${rooms.getClassroomNR()}"></td>
-            <td class="tableData"><button type="button" th:onclick="toggle([[${rooms.getClassID}]])" class="collapsible">Show students</button></td>
+            <td class="tableData" th:text="${rooms.getClassDate()}"></td>
 
         </tr>
         </td>
@@ -51,25 +51,6 @@
     <img th:src="@{../imgs/noviLogo.png}"/>
 </div>
 
-<script th:inline="javascript">
-    var list = [[${roomList}]];
-    function toggle(list)
-    {
-        for(let i = 0; i < list.length; i++)
-        {
-            console.log(list[i]);
-        }
-        var target = document.getElementById("collapsible")
-        if(target.style.display === "block")
-        {
-            target.style.display = "none";
-        }
-        else
-        {
-            target.style.display = "block";
-        }
-    }
-</script>
 </body>
 
 </html>

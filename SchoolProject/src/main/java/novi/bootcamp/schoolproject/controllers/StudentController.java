@@ -4,16 +4,18 @@ import novi.bootcamp.schoolproject.models.Classrooms;
 import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.services.ClassroomService;
 import novi.bootcamp.schoolproject.services.UserService;
+import novi.bootcamp.schoolproject.utils.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -44,30 +46,27 @@ public class StudentController {
         return "/students/showStudentDetails";
     }
 
-    @RequestMapping("/Student/UpdateUser")
-    public String showUpdateUserPage(Model model)
+    @PostMapping("/Student/ShowDetails")
+    public String saveStudentPicture(                                     @RequestParam("image")MultipartFile multipartFile)
+            throws IOException
     {
+        String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails)principal).getUsername();
         User user = userService.getUserByUserName(username);
-        model.addAttribute("user", user);
-        return "/students/UpdateUser";
-    }
+        user.setPicture(filename);
 
-    @PostMapping("/Student/UpdateUser")
-    public String updateUser(@ModelAttribute User user)
-    {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails)principal).getUsername();
-        System.out.println(username);
-        System.out.println(user.getUsername());
-        if(user.getUsername().equals(username))
-        {
-            User currentUser = userService.getUserByUserName(((UserDetails) principal).getUsername());
-            userService.updateUser(currentUser);
-        }
+        userService.updateImage(user);
+
+        User savedUser = userService.getUserByUserName(user.getUsername());
+
+        String uploadDir = "user-photos/" + savedUser.getId();
+
+        FileUploadUtil.saveFile(uploadDir, filename, multipartFile);
         return "redirect:/Student";
     }
+
+
     //endregion
 
     @GetMapping("/Student/ShowRooms")
