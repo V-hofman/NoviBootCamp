@@ -80,7 +80,7 @@ public class UserService {
             userRepo.findById(replaceId)
                     .map(
                             newUser -> {
-                                newUser.setPassword(EncryptPassword(user.getPassword()));
+                                newUser.setPassword(user.getPassword());
                                 newUser.setUsername(user.getUsername());
                                 newUser.setPersonName(user.getPersonName());
                                 newUser.setRole(user.getRole());

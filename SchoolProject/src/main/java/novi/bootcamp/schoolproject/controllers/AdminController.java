@@ -22,6 +22,13 @@ public class AdminController {
     private ClassroomService roomService;
 
 
+    @GetMapping("/Admin")
+    public String showAdminPage(Model model)
+    {
+        model.addAttribute("user", new User());
+        return "/admin/admin";
+    }
+
     //region User Endpoints
 
     @RequestMapping( "/Admin/RegisterUser")

@@ -43,12 +43,7 @@ public class AppController {
         }
     }
 
-    @GetMapping("/Admin")
-    public String showAdminPage(Model model)
-    {
-        model.addAttribute("user", new User());
-        return "/admin/admin";
-    }
+
 
     @RequestMapping("/login")
     public String showLogin(Model model)
