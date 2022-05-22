@@ -33,14 +33,7 @@ public class AppController {
             {
                 return "redirect:/Student";
             }
-            if(((UserDetails) principal).getAuthorities().toString().contains("TEACHER"))
-            {
-                return "redirect:/Teacher";
-            }
-            if(((UserDetails) principal).getAuthorities().toString().contains("PARENT"))
-            {
-                return "redirect:/Parent";
-            }else
+            else
             {
                 throw new RoleNotFoundException("Cant find role");
             }

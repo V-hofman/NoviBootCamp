@@ -1,19 +1,17 @@
 package novi.bootcamp.schoolproject.services;
 
 import novi.bootcamp.schoolproject.models.Classrooms;
-import novi.bootcamp.schoolproject.models.Student;
-import novi.bootcamp.schoolproject.repository.ClassroomRespitory;
+import novi.bootcamp.schoolproject.repository.ClassroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class ClassroomService {
 
     @Autowired
-    ClassroomRespitory classRepo;
+    private ClassroomRepository classRepo;
 
     public List<Classrooms> findAllRooms()
     {

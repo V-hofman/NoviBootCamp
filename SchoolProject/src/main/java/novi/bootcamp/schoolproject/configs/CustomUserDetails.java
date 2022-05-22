@@ -13,14 +13,13 @@ import java.util.Set;
 
 public class CustomUserDetails implements UserDetails {
 
-
-
     private User user;
 
     public CustomUserDetails(User user) {
         this.user = user;
     }
 
+    //We need to grab the authorities the person has into a list
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
          Set<Roles> roles = user.getRoles();
@@ -43,6 +42,7 @@ public class CustomUserDetails implements UserDetails {
         return user.getUsername();
     }
 
+    // All of these are set to true by default, so we can access the account
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -62,5 +62,4 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }
