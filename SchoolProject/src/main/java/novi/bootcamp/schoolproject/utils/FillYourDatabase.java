@@ -55,6 +55,7 @@ public class FillYourDatabase implements CommandLineRunner {
         user.setRole("student");
         user.setId(2);
         user.setUsername("student");
+        user.setPicture("test.png");
         userService.saveUser(user);
 
         Student student = new Student.studentBuilder()

@@ -138,10 +138,5 @@ public class AdminController {
         roomService.removeClassroomByID(room.getClassID());
         return "redirect:/Admin";
     }
-
-
-
     //endregion
-
-
 }
