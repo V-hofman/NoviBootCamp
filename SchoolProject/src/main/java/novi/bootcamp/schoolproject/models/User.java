@@ -31,7 +31,7 @@ public class User {
     private String picture;
 
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "roles",
             joinColumns = @JoinColumn(name = "userID"),
@@ -117,14 +117,13 @@ public class User {
                 tempRole.setName(role);
                 break;
             case "ADMIN":
-                tempRole.setId(4);
+                tempRole.setId(2);
                 tempRole.setName(role);
                 break;
             default:
                 throw new RuntimeException("Role not found!");
         }
         this.roles.add(tempRole);
-
     }
 
     //endregion

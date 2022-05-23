@@ -42,6 +42,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     {
 
     }
+    //Here we determine who gets to go on each page
+    //Everyone can acces the imgs/font/css files
+    //Admin can go on /Admin and /Student
+    //Students can only go to /Student
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -88,6 +92,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
+    //Here we say how to search for the info we need for the login details
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception
     {

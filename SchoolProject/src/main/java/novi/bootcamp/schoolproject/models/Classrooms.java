@@ -1,8 +1,6 @@
 package novi.bootcamp.schoolproject.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "classroom")
@@ -18,6 +16,8 @@ public class Classrooms {
         this.className = builder.className;
         this.classroomNR = builder.classRoom;
         this.ClassID = builder.classID;
+        this.classDate = builder.classDate;
+        this.classTeacher = builder.classTeacher;
     }
 
     //region Variables

@@ -87,10 +87,10 @@ public class AdminControllerTest {
                                 .param("username", tempUser.getUsername())
                                 .param("password", tempUser.getPassword())
                                 .param("personName", tempUser.getPersonName())
-                                .param("role", tempUser.getRole())
+                                .param("role", String.valueOf(tempUser.getRole()))
                         )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/Admin"))
                 .andReturn();
     }
 
@@ -103,36 +103,46 @@ public class AdminControllerTest {
                         .param("username", tempUser.getUsername())
                         .param("password", tempUser.getPassword())
                         .param("personName", tempUser.getPersonName())
-                        .param("role", tempUser.getRole())
+                        .param("role", String.valueOf(tempUser.getRole()))
                 )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/Admin"))
                 .andReturn();
     }
 
     @Test
     @WithMockUser(value = "admin", authorities = "ADMIN")
     void shouldUpdateUserAndReturnAdminView() throws Exception {
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/Admin/RegisterUser")
+                        .param("username", tempUser.getUsername())
+                        .param("password", tempUser.getPassword())
+                        .param("personName", tempUser.getPersonName())
+                        .param("role", String.valueOf(tempUser.getRole()))
+                )
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/Admin"))
+                .andReturn();
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders.post("/Admin/UpdateUser")
                         .param("username", tempUser.getUsername())
                         .param("password", tempUser.getPassword())
                         .param("personName", tempUser.getPersonName())
-                        .param("role", tempUser.getRole())
+                        .param("role", String.valueOf(tempUser.getRole()))
                 )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/Admin"))
                 .andReturn();
         this.mockMvc
                 .perform(MockMvcRequestBuilders.post("/Admin/RemoveUser")
                         .param("username", tempUser.getUsername())
                         .param("password", tempUser.getPassword())
                         .param("personName", tempUser.getPersonName())
-                        .param("role", tempUser.getRole())
+                        .param("role", String.valueOf(tempUser.getRole()))
                 )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/Admin"))
                 .andReturn();
     }
 
@@ -160,7 +170,6 @@ public class AdminControllerTest {
                 .perform(MockMvcRequestBuilders.get("/Admin/RegisterClass"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("/classrooms/RegisterClass"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("teacher"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("classroom"));
     }
 
@@ -183,8 +192,8 @@ public class AdminControllerTest {
         this.mockMvc
                 .perform(MockMvcRequestBuilders.post("/Admin/RegisterClass")
                         .flashAttr("classroom", tempClass))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/Admin"))
                 .andReturn();
     }
 
@@ -195,8 +204,8 @@ public class AdminControllerTest {
         this.mockMvc
                 .perform(MockMvcRequestBuilders.post("/Admin/RemoveClass")
                         .flashAttr("room", tempClass))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/admin/admin"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/Admin"))
                 .andReturn();
 
     }
@@ -211,7 +220,7 @@ public class AdminControllerTest {
         user.setPassword("Password");
         user.setUsername("Derik12");
         user.setPersonName("Pietje");
-        user.setRole("Admin");
+        user.setRole("admin");
         return user;
     }
 

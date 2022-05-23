@@ -1,6 +1,7 @@
 package novi.bootcamp.schoolproject.services;
 
-import novi.bootcamp.schoolproject.models.*;
+import novi.bootcamp.schoolproject.models.Student;
+import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.repository.StudentRepository;
 import novi.bootcamp.schoolproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,12 @@ public class UserService {
 
     public void saveUser(User user)
     {
+        if(user.getRoles().isEmpty())
+        {
+            user.addRole(user.getRole().toUpperCase(Locale.ROOT));
+        }
         user.setPassword(EncryptPassword(user.getPassword()));
+        userRepo.save(user);
         switch(user.getRole().toLowerCase(Locale.ROOT))
         {
             case "student":
@@ -56,11 +62,8 @@ public class UserService {
             default:
                 throw new RuntimeException("No role for user was found!");
         }
-        if(user.getRoles().isEmpty())
-        {
-            user.addRole(user.getRole().toUpperCase(Locale.ROOT));
-        }
-        userRepo.save(user);
+
+
     }
     public void updateImage(User user)
     {
