@@ -21,8 +21,7 @@ public class UserService {
     @Autowired
     private StudentRepository studentRepo;
 
-
-
+    //Delete a user by username including their children if present
     public void deleteUserByUsername(User user)
     {
         User tempUser = userRepo.findByUsername(user.getUsername());
@@ -39,11 +38,13 @@ public class UserService {
         userRepo.deleteByUsername(user.getUsername());
     }
 
+    //Grab a user by their username
     public User getUserByUserName(String username)
     {
         return userRepo.findByUsername(username);
     }
 
+    //Save a user to the database as well as their children
     public void saveUser(User user)
     {
         if(user.getRoles().isEmpty())
@@ -62,19 +63,21 @@ public class UserService {
             default:
                 throw new RuntimeException("No role for user was found!");
         }
-
-
     }
+
+    //Allows users to upload an image to their profile
     public void updateImage(User user)
     {
         userRepo.save(user);
     }
 
+    //Find all users
     public List<User> findAllUsers()
     {
         return (List<User>) userRepo.findAll();
     }
 
+    //Update a user
     public void updateUser(User user)
     {
 
@@ -105,6 +108,7 @@ public class UserService {
 
     //region Students
 
+    //Save a student to the database
     public void saveStudent(User user)
     {
         if(studentRepo.findByUserID(user.getId()) == null)
@@ -114,11 +118,6 @@ public class UserService {
                     .build();
             studentRepo.save(tempStudent);
         }
-    }
-
-    public Student findByUsername(String username)
-    {
-        return studentRepo.findByUsername(username);
     }
     //endregion
 

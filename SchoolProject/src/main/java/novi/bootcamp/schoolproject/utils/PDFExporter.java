@@ -21,6 +21,7 @@ public class PDFExporter {
         this.listRooms = listRooms;
     }
 
+    //Write the header for the PDF file
     private void writeTableHeader(PdfPTable table)
     {
         PdfPCell cell = new PdfPCell();
@@ -46,6 +47,7 @@ public class PDFExporter {
         table.addCell(cell);
     }
 
+    //Write the actual classroom data to a table
     private void writeTableData(PdfPTable table)
     {
         for(Classrooms room : listRooms)
@@ -58,6 +60,7 @@ public class PDFExporter {
         }
     }
 
+    //Here we export it to a PDF file
     public void export(HttpServletResponse response) throws DocumentException, IOException
     {
         Document document = new Document(PageSize.A4);

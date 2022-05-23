@@ -24,7 +24,7 @@ public class FillYourDatabase implements CommandLineRunner {
 
 
 
-    //Run this when springboot launches
+    //Run this when springboot launches to fill with some test data
     @Override
     public void run(String... args) throws Exception {
         adminUser();
@@ -33,6 +33,7 @@ public class FillYourDatabase implements CommandLineRunner {
         testClassroom();
     }
 
+    //region TestData
 
     private void adminUser()
     {
@@ -76,6 +77,7 @@ public class FillYourDatabase implements CommandLineRunner {
 
     }
 
+    //endregion
 
 
 }

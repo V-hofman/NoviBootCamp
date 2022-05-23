@@ -37,6 +37,7 @@ public class StudentController {
 
     //region Endpoints for student
 
+    //Show default student choice menu
     @RequestMapping("/Student")
     public String showStudentMenuChoice(Model model)
     {
@@ -44,6 +45,7 @@ public class StudentController {
         return "/students/student";
     }
 
+    //Show the details of the student
     @RequestMapping("/Student/ShowDetails")
     public String showStudentDetailPage(Model model)
     {
@@ -54,6 +56,7 @@ public class StudentController {
         return "/students/showStudentDetails";
     }
 
+    //Allows the student to upload an image
     @PostMapping("/Student/ShowDetails")
     public String saveStudentPicture(@RequestParam("image")MultipartFile multipartFile)
             throws IOException
@@ -74,9 +77,9 @@ public class StudentController {
         return "redirect:/Student";
     }
 
-
     //endregion
 
+    //Shows the page with all classrooms
     @GetMapping("/Student/ShowRooms")
     public String showRooms(Model model)
     {
@@ -86,6 +89,7 @@ public class StudentController {
         return "/classrooms/showClassrooms";
     }
 
+    //Exports the current classrooms to a downloadable PDF file
     @GetMapping("/Student/export/pdf")
     public void exportToPdf(HttpServletResponse response) throws DocumentException, IOException
     {
