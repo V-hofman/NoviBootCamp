@@ -12,8 +12,8 @@ public class Student {
     @Column(nullable = false, unique = true,name = "studentID")
     private int studentID;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userID", referencedColumnName = "userID")
+    @OneToOne
+    @JoinColumn(name = "stud_userID", referencedColumnName = "userID")
     private User user;
 
 

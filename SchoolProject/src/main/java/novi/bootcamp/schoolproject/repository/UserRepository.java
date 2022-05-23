@@ -1,6 +1,5 @@
 package novi.bootcamp.schoolproject.repository;
 
-import novi.bootcamp.schoolproject.models.Roles;
 import novi.bootcamp.schoolproject.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

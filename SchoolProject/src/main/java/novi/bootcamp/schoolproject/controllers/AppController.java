@@ -6,19 +6,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
 public class AppController {
 
-
+    //Shows the homepage
     @GetMapping("/")
     public String viewHomePage(Model model)
     {
         return "index";
     }
 
+    //Redirect to the proper page based on the current logged in user's role
     @GetMapping("/Redirect")
     public String redirectPage() throws RoleNotFoundException {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -43,8 +45,7 @@ public class AppController {
         }
     }
 
-
-
+    //Show the login page
     @RequestMapping("/login")
     public String showLogin(Model model)
     {
@@ -52,6 +53,7 @@ public class AppController {
         return "login";
     }
 
+    //Show a test error page
     @RequestMapping("/testError")
     public void handleRequest() {
         throw new RuntimeException("test exception");

@@ -7,7 +7,10 @@ import novi.bootcamp.schoolproject.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class AdminController {
     private ClassroomService roomService;
 
 
+    //Default admin choice menu
     @GetMapping("/Admin")
     public String showAdminPage(Model model)
     {
@@ -31,6 +35,7 @@ public class AdminController {
 
     //region User Endpoints
 
+    //Form page for creating a new user
     @RequestMapping( "/Admin/RegisterUser")
     public String showRegisterUserPage(Model model)
     {
@@ -38,6 +43,7 @@ public class AdminController {
         return "/admin/RegisterUser";
     }
 
+    //Posting a new user to save it in the database
     @PostMapping("/Admin/RegisterUser")
     public String savePerson(@ModelAttribute User user)
     {
@@ -45,6 +51,7 @@ public class AdminController {
         return "redirect:/Admin";
     }
 
+    //Show the remove user form
     @RequestMapping("/Admin/RemoveUser")
     public String showRemoveUserPage(Model model)
     {
@@ -52,6 +59,7 @@ public class AdminController {
         return "/admin/RemoveUser";
     }
 
+    //Allow the user to be removed from the database
     @PostMapping("/Admin/RemoveUser")
     public String removePerson(@ModelAttribute User user)
     {
@@ -59,6 +67,7 @@ public class AdminController {
         return "redirect:/Admin";
     }
 
+    //Show the update user page
     @RequestMapping("/Admin/UpdateUser")
     public String showUpdateUserPage(Model model)
     {
@@ -66,6 +75,7 @@ public class AdminController {
         return "/admin/UpdateUser";
     }
 
+    //Allows the user to be updated in the database
     @PostMapping("/Admin/UpdateUser")
     public String updateUser(@ModelAttribute User user)
     {
@@ -73,6 +83,7 @@ public class AdminController {
         return "redirect:/Admin";
     }
 
+    //Shows the page with all users
     @GetMapping("/Admin/ShowUsers")
     public String showUsers(Model model)
     {
@@ -85,6 +96,8 @@ public class AdminController {
     //endregion
 
     //region Classroom Endpoints
+
+    //Shows the page with all classrooms
     @GetMapping("/Admin/ShowRooms")
     public String showRooms(Model model)
     {
@@ -94,6 +107,7 @@ public class AdminController {
         return "/classrooms/showClassrooms";
     }
 
+    //Shows the page with creating a new class form
     @RequestMapping( "/Admin/RegisterClass")
     public String showRegisterClassPage(Model model)
     {
@@ -101,15 +115,15 @@ public class AdminController {
         return "/classrooms/RegisterClass";
     }
 
+    //Allows the class to be saved in the database
     @PostMapping("/Admin/RegisterClass")
-    public String saveClass(
-            @ModelAttribute("classroom") Classrooms classroom
-            )
+    public String saveClass(@ModelAttribute("classroom") Classrooms classroom)
     {
         roomService.saveClassroom(classroom);
         return "redirect:/Admin";
     }
 
+    //Shows the remove class page
     @GetMapping("/Admin/RemoveClass")
     public String showRemoveClassPage(Model model)
     {
@@ -117,6 +131,7 @@ public class AdminController {
         return "/classrooms/RemoveClass";
     }
 
+    //Allows the class to be removed from the database
     @PostMapping("/Admin/RemoveClass")
     public String removeClass(@ModelAttribute Classrooms room)
     {

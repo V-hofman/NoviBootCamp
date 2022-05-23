@@ -12,7 +12,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     private UserRepository repo;
 
-    //look for the user
+    //look for the user needed for security
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repo.findByUsername(username);

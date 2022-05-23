@@ -9,9 +9,7 @@ import javax.transaction.Transactional;
 
 public interface ClassroomRepository extends JpaRepository<Classrooms, Integer> {
 
-    @Query("SELECT c FROM Classrooms c WHERE c.className =?1")
-    Classrooms findClassroomsByClassName(String name);
-
+    //Delete a room by classID
     @Transactional
     @Modifying
     @Query("DELETE FROM Classrooms c WHERE c.ClassID =?1")

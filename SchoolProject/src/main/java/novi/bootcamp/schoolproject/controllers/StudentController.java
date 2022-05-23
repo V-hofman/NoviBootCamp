@@ -1,20 +1,29 @@
 package novi.bootcamp.schoolproject.controllers;
 
+import com.lowagie.text.DocumentException;
 import novi.bootcamp.schoolproject.models.Classrooms;
 import novi.bootcamp.schoolproject.models.User;
 import novi.bootcamp.schoolproject.services.ClassroomService;
 import novi.bootcamp.schoolproject.services.UserService;
 import novi.bootcamp.schoolproject.utils.FileUploadUtil;
+import novi.bootcamp.schoolproject.utils.PDFExporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -28,6 +37,7 @@ public class StudentController {
 
     //region Endpoints for student
 
+    //Show default student choice menu
     @RequestMapping("/Student")
     public String showStudentMenuChoice(Model model)
     {
@@ -35,6 +45,7 @@ public class StudentController {
         return "/students/student";
     }
 
+    //Show the details of the student
     @RequestMapping("/Student/ShowDetails")
     public String showStudentDetailPage(Model model)
     {
@@ -45,8 +56,9 @@ public class StudentController {
         return "/students/showStudentDetails";
     }
 
+    //Allows the student to upload an image
     @PostMapping("/Student/ShowDetails")
-    public String saveStudentPicture(                                     @RequestParam("image")MultipartFile multipartFile)
+    public String saveStudentPicture(@RequestParam("image")MultipartFile multipartFile)
             throws IOException
     {
         String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -65,9 +77,9 @@ public class StudentController {
         return "redirect:/Student";
     }
 
-
     //endregion
 
+    //Shows the page with all classrooms
     @GetMapping("/Student/ShowRooms")
     public String showRooms(Model model)
     {
@@ -75,5 +87,22 @@ public class StudentController {
         List<Classrooms> rooms = roomService.findAllRooms();
         model.addAttribute("roomList", rooms);
         return "/classrooms/showClassrooms";
+    }
+
+    //Exports the current classrooms to a downloadable PDF file
+    @GetMapping("/Student/export/pdf")
+    public void exportToPdf(HttpServletResponse response) throws DocumentException, IOException
+    {
+        response.setContentType("application/pdf");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormat.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue= "attachment; filename=classes_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<Classrooms> roomList = roomService.findAllRooms();
+        PDFExporter exporter = new PDFExporter(roomList);
+        exporter.export(response);
     }
 }
