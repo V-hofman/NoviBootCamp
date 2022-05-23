@@ -1,3 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS school;
+
+
+
 DROP TABLE IF EXISTS `classroom`;
 DROP TABLE IF EXISTS `roles`;
 DROP TABLE IF EXISTS `roletype`;
