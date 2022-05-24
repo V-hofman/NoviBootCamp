@@ -13,12 +13,13 @@
 <div id="box">
     <p id="LoginPrompt">Remove User</p>
     <form id="boxRegister" th:action="@{/Admin/RemoveUser}" th:object="${user}" method="post" style="text-align:center">
+        <label for="username">Username:</label></br>
                <input name="username" type="text" id="username" autocomplete="off" placeholder="Username" required
                        minlength="=2" maxlength="20" th:field="*{Username}"><br><br><br><br>
         <input type="checkbox" name="check" value="2" required>
-        <span class="riskPopUp">Ik heb de risico's van verwijderen gelezen<span class="tooltiptext">Een verwijderde gebruiker is definitief verwijderd en niet terug te halen.
-        Indien dit de laatste admin account was, neem dan contact met de beheerder</span></span><br><br><br>
-        <input id="submitDelete" type="submit" value="VERWIJDEREN"><br>
+        <span class="riskPopUp">I agree with the risks of removal<span class="tooltiptext">A removed user is gone permanently, if the account removed was the last admin account,
+        ask the admins to restart the application</span></span><br><br><br>
+        <input id="submitDelete" type="submit" value="DELETE"><br>
     </form>
     <div>
         <p id="signature">This project was made by<br> Vincent M. Seremak</p>

@@ -35,7 +35,7 @@ public class PDFExporter {
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 
-        cell.setPhrase(new Phrase("Class ID:", font));
+        cell.setPhrase(new Phrase("ID:", font));
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("Course:", font));
@@ -101,7 +101,7 @@ public class PDFExporter {
 
         PdfPTable table = new PdfPTable(5);
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] { 1.5f, 3.5f, 3.0f, 1.5f, 1.5f});
+        table.setWidths(new float[] { 0.8f, 3.0f, 3.0f, 1.5f, 2.7f});
         table.setSpacingBefore(10);
 
         writeTableHeader(table);

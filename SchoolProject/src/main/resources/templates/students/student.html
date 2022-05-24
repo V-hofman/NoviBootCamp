@@ -11,23 +11,19 @@
 <body>
 
 <div id="box">
-  <p id="LoginPrompt">Keuzemenu</p>
+  <p id="LoginPrompt">Student Menu</p>
   <span id="keuzeMenu"><h2>USER MANAGEMENT</h2>
         <div> <a th:href="@{/Student/ShowDetails}">Show your details</a></div>
         <h2>CLASSROOM MANAGEMENT</h2>
         <div> <a th:href="@{/Student/ShowRooms}">Show all classrooms</a></div>
 
     <form th:action="@{/logout}" method="post">
-         <button type="submit">Log uit</button>
+         <button type="submit">Log out</button>
  </form>
     </span>
   <div>
     <p id="signature">This project was made by<br> Vincent M. Seremak</p>
   </div>
-</div>
-
-<div id="logo">
-  <img th:src="@{imgs/noviLogo.png}"/>
 </div>
 
 </body>

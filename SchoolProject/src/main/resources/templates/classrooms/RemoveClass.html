@@ -13,6 +13,7 @@
 <div id="box">
     <p id="LoginPrompt">Remove Classroom</p>
     <form id="boxRegister" th:action="@{/Admin/RemoveClass}"  method="post" style="text-align:center">
+        <label for="username">Class ID:</label></br>
                <input name="username" type="text" id="username" autocomplete="off" placeholder="Classroom ID" required
                        minlength="=2" maxlength="20" th:field="*{classroom.classID}"><br><br><br><br>
         <input type="checkbox" name="check" value="2" required>
