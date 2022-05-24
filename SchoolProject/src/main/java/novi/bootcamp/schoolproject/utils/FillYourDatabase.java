@@ -68,13 +68,33 @@ public class FillYourDatabase implements CommandLineRunner {
     {
         Classrooms room = new Classrooms.roomBuilder()
                 .classRoom("A13")
-                .className("Wiskunde")
+                .className("Mathj")
                 .classID(1)
                 .classTeacher("Mr. Pieter")
                 .classDate("12-12-2021")
                 .build();
 
         roomService.saveClassroom(room);
+
+        Classrooms room2 = new Classrooms.roomBuilder()
+                .classRoom("B8")
+                .className("Physics")
+                .classID(2)
+                .classTeacher("Mr. Frank")
+                .classDate("12-12-2021")
+                .build();
+
+        roomService.saveClassroom(room2);
+
+        Classrooms room3 = new Classrooms.roomBuilder()
+                .classRoom("A13")
+                .className("Physical Education")
+                .classID(3  )
+                .classTeacher("Mr. Charles")
+                .classDate("12-12-2021")
+                .build();
+
+        roomService.saveClassroom(room3);
 
     }
 
