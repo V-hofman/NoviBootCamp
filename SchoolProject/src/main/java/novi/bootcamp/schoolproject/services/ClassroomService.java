@@ -5,6 +5,11 @@ import novi.bootcamp.schoolproject.repository.ClassroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,8 +25,12 @@ public class ClassroomService {
     }
 
     //Saves a classroom inside the database
-    public void saveClassroom(Classrooms room)
-    {
+    public void saveClassroom(Classrooms room) throws ParseException {
+        String oldString = room.getClassDate();
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(oldString);
+        String newString = new SimpleDateFormat("dd-MM-yyyy").format(date);
+        room.setClassDate(newString);
+
         classRepo.save(room);
     }
 

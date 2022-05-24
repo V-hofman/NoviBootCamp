@@ -16,6 +16,10 @@ public class PDFExporter {
 
     private List<Classrooms> listRooms;
 
+    private boolean isColored = false;
+
+    private Color rowColor = new Color(255,242,243);
+
     public PDFExporter(List<Classrooms> listRooms)
     {
         this.listRooms = listRooms;
@@ -25,7 +29,7 @@ public class PDFExporter {
     private void writeTableHeader(PdfPTable table)
     {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.BLUE);
+        cell.setBackgroundColor(rowColor.darker());
         cell.setPadding(5);
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
@@ -50,13 +54,32 @@ public class PDFExporter {
     //Write the actual classroom data to a table
     private void writeTableData(PdfPTable table)
     {
+        PdfPCell cell = new PdfPCell();
         for(Classrooms room : listRooms)
         {
-            table.addCell(String.valueOf(room.getClassID()));
-            table.addCell(room.getClassName());
-            table.addCell(room.getClassroomNR());
-            table.addCell(room.getClassDate());
-            table.addCell(room.getClassTeacher());
+            if(isColored)
+            {
+                cell.setBackgroundColor(rowColor);
+            }else
+            {
+                cell.setBackgroundColor(Color.WHITE);
+            }
+            cell.setPhrase(new Phrase(String.valueOf(room.getClassID())));
+            table.addCell(cell);
+
+            cell.setPhrase(new Phrase(room.getClassName()));
+            table.addCell(cell);
+
+            cell.setPhrase(new Phrase(room.getClassroomNR()));
+            table.addCell(cell);
+
+            cell.setPhrase(new Phrase(room.getClassDate()));
+            table.addCell(cell);
+
+            cell.setPhrase(new Phrase(room.getClassTeacher()));
+            table.addCell(cell);
+
+            isColored = !isColored;
         }
     }
 
@@ -69,7 +92,7 @@ public class PDFExporter {
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
-        font.setColor(Color.BLUE);
+        font.setColor(Color.BLACK);
 
         Paragraph p = new Paragraph("List of classes", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);

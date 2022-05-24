@@ -25,21 +25,17 @@
                 <input name="teachName" type="text" id="teachName" autocomplete="off" placeholder="Teacher's full name" required
                        minlength="=2" maxlength="45" th:field="*{classroom.classTeacher}"></br>
                 <label for="classDate">Classroom date</label></br>
-                <input name="classDate" type="text" id="classDate" autocomplete="off" placeholder="Date for class" required
-                       minlength="=2" maxlength="45" th:field="*{classroom.classDate}"></br>
+                <input name="classDate" type="date" id="classDate" autocomplete="off" placeholder="Date for class" required
+                       th:value="${#dates.format(#dates.createNow(),'dd/MM/YYYY HH:mm')}" th:field="*{classroom.classDate}"></br>
 
                 </br><br>
             </td></tr></table>
-        <input id="submitRegister" type="submit" value="Registreer"></br>
+        <input id="submitRegister" type="submit" value="Register"></br>
     </form>
     <div>
         <p id="signature">This project was made by<br> Vincent M. Seremak</p>
     </div>
-    <div> <a align="center" th:href="@{/Admin}">Ga terug</a></div>
-</div>
-
-<div id="logo">
-    <img th:src="@{../imgs/noviLogo.png}"/>
+    <div> <a align="center" th:href="@{/Admin}">Go back</a></div>
 </div>
 
 </body>

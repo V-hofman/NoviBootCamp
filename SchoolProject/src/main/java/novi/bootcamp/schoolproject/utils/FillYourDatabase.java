@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+
 @Component
 public class FillYourDatabase implements CommandLineRunner {
 
@@ -64,14 +66,13 @@ public class FillYourDatabase implements CommandLineRunner {
         studRepo.save(student);
     }
 
-    private void testClassroom()
-    {
+    private void testClassroom() throws ParseException {
         Classrooms room = new Classrooms.roomBuilder()
                 .classRoom("A13")
-                .className("Mathj")
+                .className("Math")
                 .classID(1)
                 .classTeacher("Mr. Pieter")
-                .classDate("12-12-2021")
+                .classDate("2022-05-26")
                 .build();
 
         roomService.saveClassroom(room);
@@ -81,7 +82,7 @@ public class FillYourDatabase implements CommandLineRunner {
                 .className("Physics")
                 .classID(2)
                 .classTeacher("Mr. Frank")
-                .classDate("12-12-2021")
+                .classDate("2022-05-26")
                 .build();
 
         roomService.saveClassroom(room2);
@@ -91,7 +92,7 @@ public class FillYourDatabase implements CommandLineRunner {
                 .className("Physical Education")
                 .classID(3  )
                 .classTeacher("Mr. Charles")
-                .classDate("12-12-2021")
+                .classDate("2022-5-26")
                 .build();
 
         roomService.saveClassroom(room3);

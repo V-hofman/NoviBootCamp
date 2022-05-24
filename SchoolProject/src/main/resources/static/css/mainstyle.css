@@ -72,21 +72,13 @@ body {
     width: 30%;
 }
 
-#username:focus {
-    outline: none;
-    border: 3px solid #555;
-}
-#username {
+#username, #fullName, #password, #courseName, #Roomnr, #teachName, #classDate {
     border: none;
     border-bottom: 2px solid darkslategray;
 }
-#password:focus {
+#username:focus, #fullName:focus, #password:focus, #courseName:focus, #Roomnr:focus, #teachName:focus, #classDate:focus {
     outline: none;
     border: 3px solid #555;
-}
-#password {
-    border: none;
-    border-bottom: 2px solid darkslategray;
 }
 
 #submit:hover {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -117,8 +118,7 @@ public class AdminController {
 
     //Allows the class to be saved in the database
     @PostMapping("/Admin/RegisterClass")
-    public String saveClass(@ModelAttribute("classroom") Classrooms classroom)
-    {
+    public String saveClass(@ModelAttribute("classroom") Classrooms classroom) throws ParseException {
         roomService.saveClassroom(classroom);
         return "redirect:/Admin";
     }

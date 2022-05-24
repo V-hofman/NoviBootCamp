@@ -11,7 +11,7 @@
 <body>
 
 <div id="box">
-    <p id="LoginPrompt">Keuzemenu</p>
+    <p id="LoginPrompt">Choice Menu</p>
     <span id="keuzeMenu"><h2>USER MANAGEMENT</h2>
         <div> <a th:href="@{/Admin/ShowUsers}">Show all users</a></div>
         <div> <a th:href="@{/Admin/RegisterUser}">Create a new user</a></div>
@@ -23,7 +23,7 @@
         <div> <a th:href="@{/Admin/RemoveClass}">Remove existing classroom</a></div>
 
     <form th:action="@{/logout}" method="post">
-         <button type="submit">Log uit</button>
+         <button type="submit">Log Out</button>
  </form>
     </span>
     <div>
@@ -31,9 +31,6 @@
     </div>
 </div>
 
-<div id="logo">
-    <img th:src="@{imgs/noviLogo.png}"/>
-</div>
 
 </body>
 
