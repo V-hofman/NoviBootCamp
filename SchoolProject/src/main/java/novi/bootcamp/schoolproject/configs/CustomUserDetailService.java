@@ -15,7 +15,11 @@ public class CustomUserDetailService implements UserDetailsService {
     //look for the user needed for security
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        //Search in the database
         User user = repo.findByUsername(username);
+
+        //Can't find it then throw an error
         if(user==null)
         {
             throw new UsernameNotFoundException("User not found");

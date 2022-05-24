@@ -23,22 +23,29 @@ public class AppController {
     //Redirect to the proper page based on the current logged in user's role
     @GetMapping("/Redirect")
     public String redirectPage() throws RoleNotFoundException {
+
+        //Grab the current logged-in user
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        //See if it's an actual user
         if(principal instanceof UserDetails)
         {
+            //If the authorities contain ADMIN send them to the ADMIN page
             if(((UserDetails) principal).getAuthorities().toString().contains("ADMIN"))
             {
                 return "redirect:/Admin";
             }
+            //If the authorities contain STUDENT send them to the STUDENT page
             if(((UserDetails) principal).getAuthorities().toString().contains("STUDENT"))
             {
                 return "redirect:/Student";
             }
+            //If for some reason another roll is there throw error
             else
             {
                 throw new RoleNotFoundException("Cant find role");
             }
+            //If it's not a user throw another error
         }else
         {
             throw new RuntimeException("Redirect page oopsie");
@@ -49,7 +56,9 @@ public class AppController {
     @RequestMapping("/login")
     public String showLogin(Model model)
     {
+        //Add a user to the model, so we can send it with the POST request
         model.addAttribute("user", new User());
+
         return "login";
     }
 

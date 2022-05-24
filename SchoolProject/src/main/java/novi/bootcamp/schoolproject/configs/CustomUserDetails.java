@@ -22,9 +22,11 @@ public class CustomUserDetails implements UserDetails {
     //We need to grab the authorities the person has into a list
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        //Collection of the authorities
          Set<Roles> roles = user.getRoles();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
+        //For each role add the authority for it
         for (Roles role: roles)
         {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
