@@ -47,6 +47,10 @@ public class UserService {
     //Save a user to the database as well as their children
     public void saveUser(User user)
     {
+        if(userRepo.findByUsername(user.getUsername()) != null)
+        {
+            throw new RuntimeException("User exists!");
+        }
         if(user.getRoles().isEmpty())
         {
             user.addRole(user.getRole().toUpperCase(Locale.ROOT));
