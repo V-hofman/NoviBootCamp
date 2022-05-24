@@ -29,9 +29,11 @@ public class FillYourDatabase implements CommandLineRunner {
     //Run this when springboot launches to fill with some test data
     @Override
     public void run(String... args) throws Exception {
+        //Fill database with 2 users
         adminUser();
         studentUser();
 
+        //Fill database with 3 classrooms
         testClassroom();
     }
 
@@ -60,10 +62,6 @@ public class FillYourDatabase implements CommandLineRunner {
         user.setPicture("test.png");
         userService.saveUser(user);
 
-        Student student = new Student.studentBuilder()
-                .user(user)
-                .build();
-        studRepo.save(student);
     }
 
     private void testClassroom() throws ParseException {

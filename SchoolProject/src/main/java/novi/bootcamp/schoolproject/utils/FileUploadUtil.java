@@ -15,13 +15,16 @@ public class FileUploadUtil {
     //To upload a file to our local directory
     public static void saveFile(String uploadDir, String fileName,
                                 MultipartFile multipartFile) throws IOException {
+
+        //Get the directory it needs to be uploaded to
         Path uploadPath = Paths.get(uploadDir);
 
+        //Check if the folder exists where it needs to be saved, if not create it
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        //try to save it
+        //try to save the image
         try (InputStream inputStream = multipartFile.getInputStream()) {
             Path filePath = uploadPath.resolve(fileName);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);

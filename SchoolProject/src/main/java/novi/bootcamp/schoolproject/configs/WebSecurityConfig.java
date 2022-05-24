@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/Redirect", true) //If successful login go to /Redirect
                 .permitAll() //Everyone can access /Login END Custom login define
                 .and()
-                .logout() //START Custom logout
+                .logout()
                 .invalidateHttpSession(true) //Remove the HttpSession
                 .deleteCookies("JSESSIONID") //Delete the cookie that keeps you logged in
                 .logoutSuccessUrl("/login") //If you log out, go to /login
